@@ -1,0 +1,25 @@
+type Query {
+  posts: [Post!]!
+  getPostById(postId: String): Post!
+}
+
+type Mutation {
+  addPost(input: PostInput): Post!
+  updatePost(postId: String, input: PostInput): Post!
+  deletePost(postId: String): Boolean!
+}
+
+type Post {
+  content: String!
+  media: String
+  sharedPost: String
+  author: String
+  comments: [Comment]
+  likes: [User]
+}
+
+input PostInput {
+  content: String!
+  media: String
+  sharedPost: String
+}

@@ -1,0 +1,24 @@
+type Query {
+  users: [User!]!
+  getUserById(userId: String): User!
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  username: String!
+  email: String!
+  followers: [User]
+  tokens: Token
+  bio: String
+  location: String
+  image: String
+  cover: String
+  isVerified: Boolean
+}
+
+type Token {
+  accessToken: String!
+  refreshToken: String!
+}
