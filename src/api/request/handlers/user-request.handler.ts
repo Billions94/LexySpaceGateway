@@ -7,7 +7,7 @@ export class UserRequestHandler
   extends AbstractRequestHandler
   implements GetRequestHandlerInterface
 {
-  protected path = 'users/{userId}';
+  protected path = 'users/me';
 
   async get(params?: URLSearchParams, init?: RequestInit) {
     init = this.forwardAuthHeader(init);

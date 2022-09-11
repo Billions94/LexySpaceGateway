@@ -5,7 +5,7 @@ type Mutation {
 
 
 input AuthUserInput {
-  userName: String!
+  userName: String
   email: String!
   password: String!
 }

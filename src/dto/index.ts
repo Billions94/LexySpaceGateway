@@ -9,7 +9,7 @@
 /* eslint-disable */
 
 export class AuthUserInput {
-    userName: string;
+    userName?: Nullable<string>;
     email: string;
     password: string;
 }
@@ -33,7 +33,7 @@ export class ReplyInput {
 export class UserInput {
     firstName?: Nullable<string>;
     lastName?: Nullable<string>;
-    userName: string;
+    userName?: Nullable<string>;
     email?: Nullable<string>;
     bio?: Nullable<string>;
     location?: Nullable<string>;
@@ -74,7 +74,7 @@ export abstract class IQuery {
     replies: Reply[];
     getReplyById: Post;
     users: User[];
-    getUserById: User;
+    user: User;
 }
 
 export class Comment {
@@ -125,7 +125,7 @@ export class User {
 
 export class Token {
     __typename?: 'Token';
-    accessToken: string;
+    accessToken?: Nullable<string>;
     refreshToken: string;
 }
 

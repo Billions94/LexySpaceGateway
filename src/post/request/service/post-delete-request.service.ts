@@ -4,10 +4,6 @@ import { AbstractRequestService } from '../../../core/request/abstract-request.s
 
 @Injectable()
 export class PostDeleteRequestService extends AbstractRequestService {
-  constructor() {
-    super();
-  }
-
   async execute(postId: string): Promise<boolean> {
     const requestHandler = this.requestHandlerFactory.createDeleteRequest(
       api.handler.DELETE_POST

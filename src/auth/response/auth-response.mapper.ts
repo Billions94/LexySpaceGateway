@@ -6,7 +6,7 @@ import { AuthResponse } from 'src/dto';
 export class AuthResponseMapper {
   map(data: any): AuthResponse {
     return {
-      id: data.id,
+      id: data._id,
       accessToken: data.accessToken,
       refreshToken: data.refreshToken,
     }
