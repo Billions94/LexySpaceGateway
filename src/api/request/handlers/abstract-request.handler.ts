@@ -52,7 +52,7 @@ export abstract class AbstractRequestHandler {
   }
 
   /**
-   * Forwards ReCAPTCHA requests header from client to rest datasource
+   * Forwards ReCAPTCHA requests header from user to rest datasource
    */
   forwardReCaptchaHeader(init?: RequestInit) {
     const reCaptchaHeaders: any = {};

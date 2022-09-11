@@ -3,6 +3,11 @@ type Query {
   getUserById(userId: String): User!
 }
 
+type Mutation {
+  updateUser(userId: String, input: UserInput): User!
+  deleteUser(userId: String): Boolean!
+}
+
 type User {
   id: ID!
   firstName: String
@@ -16,6 +21,17 @@ type User {
   image: String
   cover: String
   isVerified: Boolean
+}
+
+input UserInput {
+  firstName: String
+  lastName: String
+  userName: String!
+  email: String
+  bio: String
+  location: String
+  image: String
+  cover: String
 }
 
 type Token {

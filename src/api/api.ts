@@ -1,14 +1,23 @@
-import { GetPostRequestHandler } from "./request/handlers/get-post-request.handler";
-import { LoginRequestHandler } from "./request/handlers/login-request.handler";
-import { PostsRequestHandler } from "./request/handlers/posts-request.handler";
-import { RegisterRequestHandler } from "./request/handlers/register-request.handler";
-
+import { PostGetRequestHandler } from './request/handlers/post-get-request.handler';
+import { UserLoginRequestHandler } from './request/handlers/user-login-request.handler';
+import { PostsRequestHandler } from './request/handlers/posts-request.handler';
+import { UserRegisterRequestHandler } from './request/handlers/user-register-request.handler';
+import { PostUpdateRequestHandler } from './request/handlers/post-update-request.handler';
+import { PostDeleteRequestHandler } from './request/handlers/post-delete-request.handler';
+import { UserRequestHandler } from './request/handlers/user-request.handler';
+import { UserUpdateRequestHandler } from './request/handlers/user-update-request.handler';
+import { UserDeleteRequestHandler } from './request/handlers/user-delete-request.handler';
 
 const requestHandler: { [key: string]: any } = {
-  REGISTER: RegisterRequestHandler,
-  LOGIN: LoginRequestHandler,
+  REGISTER: UserRegisterRequestHandler,
+  LOGIN: UserLoginRequestHandler,
+  USER: UserRequestHandler,
+  UPDATE_USER: UserUpdateRequestHandler,
+  DELETE_USER: UserDeleteRequestHandler,
   POSTS: PostsRequestHandler,
-  POST_BY_ID: GetPostRequestHandler
+  GET_POST: PostGetRequestHandler,
+  UPDATE_POST: PostUpdateRequestHandler,
+  DELETE_POST: PostDeleteRequestHandler,
 };
 
 export const api: { [key: string]: any } = {

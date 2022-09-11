@@ -8,6 +8,7 @@ import { CommentModule } from './comment/comment.module';
 import { ReplyModule } from './reply/reply.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ConfigModule } from '@nestjs/config';
     UserModule,
     CommentModule,
     ReplyModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

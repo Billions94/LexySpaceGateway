@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ApiModule } from '../api/api.module';
 import { CoreModule } from '../core/core.module';
-import { PostByIdRequestService } from './request/service/post-by-id-request.service';
+import { PostsRequestMapper } from './request/mapper/post-request.mapper';
+import { PostGetRequestService } from './request/service/post-get-request.service';
 import { PostsRequestService } from './request/service/posts-request.service';
+import { PostUpdateRequestService } from './request/service/post-update-request.service';
 import { PostResolver } from './resolver/post.resolver';
 import { PostResponseMapper } from './response/post-response.mapper';
+import { PostDeleteRequestService } from './request/service/post-delete-request.service';
 
 
 @Module({
@@ -13,9 +16,14 @@ import { PostResponseMapper } from './response/post-response.mapper';
     // Resolvers
     PostResolver,
 
+    // Request mapper
+    PostsRequestMapper,
+
     // Request service
     PostsRequestService,
-    PostByIdRequestService,
+    PostGetRequestService,
+    PostUpdateRequestService,
+    PostDeleteRequestService,
 
     // Response mapper
     PostResponseMapper,

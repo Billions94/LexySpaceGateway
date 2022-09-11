@@ -8,6 +8,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export class AuthUserInput {
+    userName: string;
+    email: string;
+    password: string;
+}
+
 export class CommentInput {
     content: string;
     media?: Nullable<string>;
@@ -24,6 +30,41 @@ export class ReplyInput {
     media?: Nullable<string>;
 }
 
+export class UserInput {
+    firstName?: Nullable<string>;
+    lastName?: Nullable<string>;
+    userName: string;
+    email?: Nullable<string>;
+    bio?: Nullable<string>;
+    location?: Nullable<string>;
+    image?: Nullable<string>;
+    cover?: Nullable<string>;
+}
+
+export abstract class IMutation {
+    __typename?: 'IMutation';
+    register?: Nullable<AuthResponse>;
+    login?: Nullable<AuthResponse>;
+    addComment: Comment;
+    updateComment: Comment;
+    deleteComment: boolean;
+    addPost: Post;
+    updatePost: Post;
+    deletePost: boolean;
+    addReply: Reply;
+    updateReply: Reply;
+    deleteReply: boolean;
+    updateUser: User;
+    deleteUser: boolean;
+}
+
+export class AuthResponse {
+    __typename?: 'AuthResponse';
+    id: string;
+    accessToken: string;
+    refreshToken: string;
+}
+
 export abstract class IQuery {
     __typename?: 'IQuery';
     comments: Comment[];
@@ -34,19 +75,6 @@ export abstract class IQuery {
     getReplyById: Post;
     users: User[];
     getUserById: User;
-}
-
-export abstract class IMutation {
-    __typename?: 'IMutation';
-    addComment: Comment;
-    updateComment: Comment;
-    deleteComment: boolean;
-    addPost: Post;
-    updatePost: Post;
-    deletePost: boolean;
-    addReply: Reply;
-    updateReply: Reply;
-    deleteReply: boolean;
 }
 
 export class Comment {

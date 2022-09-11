@@ -2,7 +2,7 @@ import { RequestInit } from 'apollo-server-env';
 import { GetRequestHandlerInterface } from '../../../core/request/get-request-handler.interface';
 import { AbstractRequestHandler } from './abstract-request.handler';
 
-export class GetPostRequestHandler
+export class PostGetRequestHandler
   extends AbstractRequestHandler
   implements GetRequestHandlerInterface
 {
