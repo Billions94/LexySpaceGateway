@@ -61,10 +61,11 @@ export class Comment {
 
 export class Post {
     __typename?: 'Post';
+    id: string;
     content: string;
     media?: Nullable<string>;
     sharedPost?: Nullable<string>;
-    author?: Nullable<string>;
+    author: User;
     comments?: Nullable<Nullable<Comment>[]>;
     likes?: Nullable<Nullable<User>[]>;
 }
@@ -81,10 +82,10 @@ export class Reply {
 export class User {
     __typename?: 'User';
     id: string;
-    firstName: string;
-    lastName: string;
-    username: string;
-    email: string;
+    firstName?: Nullable<string>;
+    lastName?: Nullable<string>;
+    userName: string;
+    email?: Nullable<string>;
     followers?: Nullable<Nullable<User>[]>;
     tokens?: Nullable<Token>;
     bio?: Nullable<string>;

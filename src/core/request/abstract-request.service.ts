@@ -38,7 +38,7 @@ export abstract class AbstractRequestService {
   ) {
     let responseBody: any;
 
-    const transaction = this.startSentryTransaction('Glue GET Request');
+    const transaction = this.startSentryTransaction('Api GET Request');
 
     try {
       responseBody = await requestHandler.get(
@@ -46,7 +46,8 @@ export abstract class AbstractRequestService {
         init
       );
     } catch (e) {
-      this.handleGlueError(e);
+      console.error(e);
+      this.handleApiError(e);
     }
 
     transaction.finish();
@@ -62,7 +63,7 @@ export abstract class AbstractRequestService {
   ) {
     let responseBody;
 
-    const transaction = this.startSentryTransaction('Glue POST Request');
+    const transaction = this.startSentryTransaction('Api POST Request');
 
     try {
       responseBody = await requestHandler.post(
@@ -71,7 +72,7 @@ export abstract class AbstractRequestService {
         init
       );
     } catch (e) {
-      this.handleGlueError(e, body);
+      this.handleApiError(e, body);
     }
 
     transaction.finish();
@@ -87,7 +88,7 @@ export abstract class AbstractRequestService {
   ) {
     let responseBody;
 
-    const transaction = this.startSentryTransaction('Glue PATCH Request');
+    const transaction = this.startSentryTransaction('Api PATCH Request');
 
     try {
       responseBody = await requestHandler.patch(
@@ -96,7 +97,7 @@ export abstract class AbstractRequestService {
         init
       );
     } catch (e) {
-      this.handleGlueError(e, body);
+      this.handleApiError(e, body);
     }
 
     transaction.finish();
@@ -111,7 +112,7 @@ export abstract class AbstractRequestService {
   ) {
     let responseBody;
 
-    const transaction = this.startSentryTransaction('Glue DELETE Request');
+    const transaction = this.startSentryTransaction('Api DELETE Request');
 
     try {
       responseBody = await requestHandler.delete(
@@ -119,7 +120,7 @@ export abstract class AbstractRequestService {
         init
       );
     } catch (e) {
-      this.handleGlueError(e);
+      this.handleApiError(e);
     }
 
     transaction.finish();
@@ -127,7 +128,7 @@ export abstract class AbstractRequestService {
     return responseBody;
   }
 
-  protected handleGlueError(e: any, requestBody?: any): never {
+  protected handleApiError(e: any, requestBody?: any): never {
     const errorResponseHandler = new ErrorResponseHandler(e);
     const unprocessableEntityError = new UnprocessableEntityError(
       errorResponseHandler.getErrorMessage(),
@@ -193,10 +194,10 @@ export abstract class AbstractRequestService {
   private getScope(requestBody?: any): Scope {
     const scope = new Sentry.Scope();
     const originRequestContext: any = {};
-    const glueRequestContext: any = {};
+    const ApiRequestContext: any = {};
 
     if (requestBody) {
-      glueRequestContext.body = JSON.stringify(requestBody, null, 4);
+      ApiRequestContext.body = JSON.stringify(requestBody, null, 4);
     }
 
     originRequestContext.host = this.context?.req?.headers['host'];
@@ -207,7 +208,7 @@ export abstract class AbstractRequestService {
       scope.setUser(JSON.parse(jwt.sub));
     }
 
-    scope.setContext('Glue-Request', glueRequestContext);
+    scope.setContext('Api-Request', ApiRequestContext);
     scope.setContext('Origin-Request', originRequestContext);
 
     return scope;

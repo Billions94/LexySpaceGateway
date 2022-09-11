@@ -5,10 +5,10 @@ type Query {
 
 type User {
   id: ID!
-  firstName: String!
-  lastName: String!
-  username: String!
-  email: String!
+  firstName: String
+  lastName: String
+  userName: String!
+  email: String
   followers: [User]
   tokens: Token
   bio: String

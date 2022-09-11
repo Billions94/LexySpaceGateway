@@ -8,7 +8,11 @@ export abstract class AbstractRequestHandler {
   protected abstract path: string;
 
   async executeGetRequest(params?: URLSearchParams, init?: RequestInit) {
-    const path = this.generatePath(params);
+    let path = this.generatePath(params);
+
+    if (params?.toString()) {
+      path += '?' + params.toString();
+    }
 
     return await this.api.get(path, params, init);
   }
@@ -45,14 +49,6 @@ export abstract class AbstractRequestHandler {
     const path = this.generatePath(params);
 
     return await this.api.delete(path, params, init);
-  }
-
-  getMerchantUidHeader(): [] | null {
-    if (this.context?.req?.headers['white-label-merchant-uuid']) {
-      return this.context.req.headers['white-label-merchant-uuid'].split(',');
-    }
-
-    return null;
   }
 
   /**

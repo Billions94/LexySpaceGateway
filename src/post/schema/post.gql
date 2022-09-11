@@ -10,10 +10,11 @@ type Mutation {
 }
 
 type Post {
+  id: ID!
   content: String!
   media: String
   sharedPost: String
-  author: String
+  author: User!
   comments: [Comment]
   likes: [User]
 }

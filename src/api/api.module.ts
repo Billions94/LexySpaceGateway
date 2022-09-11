@@ -12,5 +12,6 @@ import { RestCache } from '../core/rest/rest-cache';
     RequestHandlerFactoryService,
     RestCache,
   ],
+  exports: [RequestHandlerFactoryService],
 })
 export class ApiModule {}
