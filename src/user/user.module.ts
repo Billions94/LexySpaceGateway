@@ -8,7 +8,6 @@ import { UserUpdateRequestService } from './request/service/user-update-request.
 import { UserResolver } from './resolver/user.resolver';
 import { UserResponseMapper } from './response/user-response.mapper';
 
-
 @Module({
   imports: [CoreModule, ApiModule],
   providers: [
@@ -26,5 +25,6 @@ import { UserResponseMapper } from './response/user-response.mapper';
     // Response mapper
     UserResponseMapper,
   ],
+  exports: [UserGetRequestService],
 })
 export class UserModule {}

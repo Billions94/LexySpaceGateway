@@ -2,11 +2,11 @@ import { RequestInit } from 'apollo-server-env';
 import { GetRequestHandlerInterface } from '../../../core/request/get-request-handler.interface';
 import { AbstractRequestHandler } from './abstract-request.handler';
 
-export class UserRequestHandler
+export class CommentGetRequestHandler
   extends AbstractRequestHandler
   implements GetRequestHandlerInterface
 {
-  protected path = 'users/me';
+  protected path = 'comments/{commentId}';
 
   async get(params?: URLSearchParams, init?: RequestInit) {
     init = this.forwardAuthHeader(init);

@@ -24,8 +24,12 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
-  async updateUser(@Args('userId') userId: string, @Args('input') input: UserInput): Promise<User> {
-    return this.userUpdateRequestService.execute(userId, input);
+  async updateUser(
+    @Args('input') input: UserInput,
+  ): Promise<User> {
+    const user = await this.userGetRequestService.execute();
+    
+    return this.userUpdateRequestService.execute(user.id, input);
   }
 
   @Mutation(() => User)
