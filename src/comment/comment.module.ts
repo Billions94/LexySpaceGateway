@@ -16,17 +16,17 @@ import { CommentDeleteRequestService } from './request/service/comment-delete-re
     // Resolver
     CommentResolver,
 
-    // Request Mapper
+    // Request mapper
     CommentRequestMapper,
 
-    // Request Service
+    // Request service
     CommentCreateRequestService,
     CommentsRequestService,
     CommentGetRequestService,
     CommentUpdateRequestService,
     CommentDeleteRequestService,
 
-    // Response Mapper
+    // Response mapper
     CommentResponseMapper,
   ],
 })

@@ -13,6 +13,11 @@ import { CommentsRequestHandler } from './request/handlers/comments-request.hand
 import { CommentGetRequestHandler } from './request/handlers/comment-get-request.handler';
 import { CommentUpdateRequestHandler } from './request/handlers/comment-update-request.handler';
 import { CommentDeleteRequestHandler } from './request/handlers/comment-delete-request.handler';
+import { ReplyCreateRequestHandler } from './request/handlers/reply-create-request.handler';
+import { RepliesRequestHandler } from './request/handlers/replies-request.handler';
+import { ReplyGetRequestHandler } from './request/handlers/reply-get-request.handler';
+import { ReplyUpdateRequestHandler } from './request/handlers/reply-update-request.handler';
+import { ReplyDeleteRequestHandler } from './request/handlers/reply-delete-request.handler';
 
 const requestHandler: { [key: string]: any } = {
   REGISTER: UserRegisterRequestHandler,
@@ -30,6 +35,11 @@ const requestHandler: { [key: string]: any } = {
   GET_COMMENT: CommentGetRequestHandler,
   UPDATE_COMMENT: CommentUpdateRequestHandler,
   DELETE_COMMENT: CommentDeleteRequestHandler,
+  CREATE_REPLY: ReplyCreateRequestHandler,
+  REPLIES: RepliesRequestHandler,
+  GET_REPLY: ReplyGetRequestHandler,
+  UPDATE_REPLY: ReplyUpdateRequestHandler,
+  DELETE_REPLY: ReplyDeleteRequestHandler,
 };
 
 export const api: { [key: string]: any } = {
