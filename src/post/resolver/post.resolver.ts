@@ -45,7 +45,7 @@ export class PostResolver {
     return this.postUpdateRequestService.execute(postId, input);
   }
 
-  @Mutation()
+  @Mutation(() => Boolean)
   async deletePost(@Args('postId') postId: string): Promise<boolean> {
     return this.postDeleteRequestService.execute(postId);
   }

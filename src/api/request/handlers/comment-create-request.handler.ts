@@ -6,7 +6,7 @@ export class CommentCreateRequestHandler
   extends AbstractRequestHandler
   implements PostRequestHandlerInterface
 {
-  protected path = 'comments';
+  protected path = 'comments/{postId}';
 
   async post(body: any, params?: URLSearchParams, init?: RequestInit) {
     init = this.forwardAuthHeader(init);
