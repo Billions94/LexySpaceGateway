@@ -60,7 +60,6 @@ export abstract class IMutation {
 
 export class AuthResponse {
     __typename?: 'AuthResponse';
-    id: string;
     accessToken: string;
     refreshToken: string;
 }
@@ -115,18 +114,15 @@ export class User {
     userName: string;
     email?: Nullable<string>;
     followers?: Nullable<Nullable<User>[]>;
-    tokens?: Nullable<Token>;
+    following?: Nullable<Nullable<User>[]>;
+    refreshToken: string;
     bio?: Nullable<string>;
     location?: Nullable<string>;
     image?: Nullable<string>;
     cover?: Nullable<string>;
+    session?: Nullable<string>;
+    activities?: Nullable<Nullable<Post>[]>;
     isVerified?: Nullable<boolean>;
-}
-
-export class Token {
-    __typename?: 'Token';
-    accessToken?: Nullable<string>;
-    refreshToken: string;
 }
 
 type Nullable<T> = T | null;

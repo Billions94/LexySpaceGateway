@@ -3,7 +3,6 @@ type Mutation {
   login(input: AuthUserInput): AuthResponse
 }
 
-
 input AuthUserInput {
   userName: String
   email: String!
@@ -11,7 +10,6 @@ input AuthUserInput {
 }
 
 type AuthResponse {
-  id: ID!
   accessToken: String!
   refreshToken: String!
 }

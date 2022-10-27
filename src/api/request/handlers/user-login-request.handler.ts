@@ -6,7 +6,7 @@ export class UserLoginRequestHandler
   extends AbstractRequestHandler
   implements PostRequestHandlerInterface
 {
-  protected path = 'users/login';
+  protected path = 'login';
 
   async post(body: any, params?: URLSearchParams, init?: RequestInit) {
     init = this.forwardAuthHeader(init);

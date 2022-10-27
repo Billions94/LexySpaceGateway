@@ -15,11 +15,14 @@ type User {
   userName: String!
   email: String
   followers: [User]
-  tokens: Token
+  following: [User]
+  refreshToken: String!
   bio: String
   location: String
   image: String
   cover: String
+  session: String
+  activities: [Post]
   isVerified: Boolean
 }
 
@@ -32,9 +35,4 @@ input UserInput {
   location: String
   image: String
   cover: String
-}
-
-type Token {
-  accessToken: String
-  refreshToken: String!
 }

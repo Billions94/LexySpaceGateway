@@ -4,8 +4,6 @@ import { AuthResponse, AuthUserInput } from '../../dto';
 import { AuthLoginRequestService } from '../request/service/auth-login-request.service';
 import { AuthRegisterRequestService } from '../request/service/auth-register-request.service';
 
-// Jeremiah 33:3
-
 @Resolver()
 @Injectable()
 export class AuthResolver {

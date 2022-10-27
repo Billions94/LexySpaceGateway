@@ -52,7 +52,7 @@ export abstract class AbstractRequestHandler {
   }
 
   /**
-   * Forwards ReCAPTCHA requests header from user to rest datasource
+   * Forwards ReCAPTCHA requests header from client to rest datasource
    */
   forwardReCaptchaHeader(init?: RequestInit) {
     const reCaptchaHeaders: any = {};
@@ -69,7 +69,6 @@ export abstract class AbstractRequestHandler {
       );
     }
 
-    // @todo AAG-410 remove if white list is in place
     // Force origin header for testing purpose
     if (this.context?.req?.headers['recaptcha-origin']) {
       reCaptchaHeaders['origin'] = this.context.req.headers['recaptcha-origin'];
@@ -105,13 +104,14 @@ export abstract class AbstractRequestHandler {
         ].substring(0, 10)}...'`,
         'AbstractRequestHandler'
       );
+    }
 
-      // Fallback: Anonymous identifier
-    } else if (this.context?.req?.headers['x-anonymous-customer-unique-id']) {
-      authHeaders['X-Anonymous-Customer-Unique-Id'] =
-        this.context.req.headers['x-anonymous-customer-unique-id'];
+    if (this.context?.req.headers) {
+      authHeaders['x-refresh'] = this.context.req.headers['x-refresh'];
       Logger.debug(
-        `Forward header 'X-Anonymous-Customer-Unique-Id': '${this.context.req.headers['x-anonymous-customer-unique-id']}'`,
+        `Forward header 'x-refresh': '${this.context.req.headers[
+          'x-refresh'
+        ].substring(0, 10)}...'`,
         'AbstractRequestHandler'
       );
     }

@@ -9,6 +9,8 @@ export class PostsRequestHandler
   protected path = 'posts';
 
   async get(params?: URLSearchParams, init?: RequestInit) {
+    init = this.forwardAuthHeader(init);
+    
     return await this.executeGetRequest(params, init);
   }
 }
