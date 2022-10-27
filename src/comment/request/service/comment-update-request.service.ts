@@ -6,7 +6,7 @@ import { CommentResponseMapper } from '../../../comment/response/comment-respons
 import { CommentInput, Comment } from '../../../dto';
 
 @Injectable()
-export class CommentCreateRequestService extends AbstractRequestService {
+export class CommentUpdateRequestService extends AbstractRequestService {
   constructor(
     private commentRequestMapper: CommentRequestMapper,
     private commentResponseMapper: CommentResponseMapper
@@ -14,17 +14,17 @@ export class CommentCreateRequestService extends AbstractRequestService {
     super();
   }
 
-  async execute(postId: string, input: CommentInput): Promise<Comment> {
-    const requestHandler = this.requestHandlerFactory.createPostRequest(
-      api.handler.CREATE_COMMENT
+  async execute(commentId: string, input: CommentInput): Promise<Comment> {
+    const requestHandler = this.requestHandlerFactory.createPatchRequest(
+      api.handler.UPDATE_COMMENT
     );
 
     const parameterHandler = this.createParameterHandler();
-    parameterHandler.append('postId', postId);
+    parameterHandler.append('commentId', commentId);
 
     const requestBody = this.commentRequestMapper.map(input);
 
-    const response = await this.handlePostRequest(
+    const response = await this.handlePatchRequest(
       requestHandler,
       requestBody,
       parameterHandler
