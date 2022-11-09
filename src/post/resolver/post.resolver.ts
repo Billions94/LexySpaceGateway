@@ -31,7 +31,7 @@ export class PostResolver {
   }
 
   @Mutation(() => Post)
-  async addPost(@Args('input') input: PostInput): Promise<any> {
+  async addPost(@Args('input') input: PostInput): Promise<Post> {
     const user = await this.userGetRequestService.execute();
 
     return this.postCreateRequestService.execute(user.userName, input);
