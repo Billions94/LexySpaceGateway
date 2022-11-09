@@ -12,6 +12,7 @@ export class AuthUserInput {
     userName?: Nullable<string>;
     email: string;
     password: string;
+    confirmPassword?: Nullable<string>;
 }
 
 export class CommentInput {

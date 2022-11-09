@@ -9,6 +9,7 @@ export class AuthRequestMapper {
       userName: input.userName,
       email: input.email,
       password: input.password,
+      confirmPassword: input.confirmPassword
     };
   }
 }
