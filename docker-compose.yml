@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  gateway:
+    build: .
+    ports:
+      - 3000:3000
+      - 9229:9229 # debug port
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run start:docker
+    restart: unless-stopped
