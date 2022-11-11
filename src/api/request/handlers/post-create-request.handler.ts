@@ -6,7 +6,7 @@ export class PostCreateRequestHandler
   extends AbstractRequestHandler
   implements PostRequestHandlerInterface
 {
-  protected path = 'posts/{userName}';
+  protected path = 'posts';
 
   async post(body: any, params?: URLSearchParams, init?: RequestInit) {
     init = this.forwardAuthHeader(init);

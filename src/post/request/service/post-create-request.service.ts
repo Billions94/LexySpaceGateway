@@ -13,20 +13,16 @@ export class PostCreateRequestService extends AbstractRequestService {
   ) {
     super();
   }
-  async execute(userName: string, input: PostInput): Promise<Post> {
+  async execute(input: PostInput): Promise<Post> {
     const requestHandler = this.requestHandlerFactory.createPostRequest(
       api.handler.CREATE_POST
     );
-
-    const parameterHandler = this.createParameterHandler();
-    parameterHandler.append('userName', userName);
 
     const requestBody = this.postRequestMapper.map(input);
 
     const response = await this.handlePostRequest(
       requestHandler,
       requestBody,
-      parameterHandler
     );
 
     return this.postResponseMapper.mapPostData(response);

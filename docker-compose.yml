@@ -5,9 +5,16 @@ services:
     build: .
     ports:
       - 3000:3000
-      - 9229:9229 # debug port
+    networks:
+      - lexyspace_be_common_network
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     command: npm run start:docker
+    environment:
+      PORT: 3000
     restart: unless-stopped
+networks: 
+  lexyspace_be_common_network:
+    external: true
+

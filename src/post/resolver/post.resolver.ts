@@ -6,7 +6,6 @@ import { PostsRequestService } from '../request/service/posts-request.service';
 import { PostUpdateRequestService } from '../request/service/post-update-request.service';
 import { PostDeleteRequestService } from '../request/service/post-delete-request.service';
 import { PostCreateRequestService } from '../request/service/post-create-request.service';
-import { UserGetRequestService } from '../../user/request/service/user-get-request.service';
 
 @Resolver(() => Post)
 @Injectable()
@@ -17,7 +16,6 @@ export class PostResolver {
     private postGetRequestService: PostGetRequestService,
     private postUpdateRequestService: PostUpdateRequestService,
     private postDeleteRequestService: PostDeleteRequestService,
-    private userGetRequestService: UserGetRequestService
   ) {}
 
   @Query(() => [Post])
@@ -32,9 +30,7 @@ export class PostResolver {
 
   @Mutation(() => Post)
   async addPost(@Args('input') input: PostInput): Promise<Post> {
-    const user = await this.userGetRequestService.execute();
-
-    return this.postCreateRequestService.execute(user.userName, input);
+    return this.postCreateRequestService.execute(input);
   }
 
   @Mutation(() => Post)
