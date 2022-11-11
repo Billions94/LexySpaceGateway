@@ -4,6 +4,7 @@ import { User, UserInput } from '../../dto';
 import { UserDeleteRequestService } from '../request/service/user-delete.request.service';
 import { UserGetRequestService } from '../request/service/user-get-request.service';
 import { UserUpdateRequestService } from '../request/service/user-update-request.service';
+import { UsersRequestService } from '../request/service/users-request.service';
 
 @Resolver(() => User)
 @Injectable()
@@ -11,12 +12,13 @@ export class UserResolver {
   constructor(
     private userGetRequestService: UserGetRequestService,
     private userUpdateRequestService: UserUpdateRequestService,
-    private userDeleteRequestService: UserDeleteRequestService
+    private userDeleteRequestService: UserDeleteRequestService,
+    private usersRequestService: UsersRequestService
   ) {}
 
   @Query(() => [User])
   async users(): Promise<User[]> {
-    return '' as unknown as User[];
+    return this.usersRequestService.execute();
   }
   @Query(() => User)
   async user(): Promise<User> {

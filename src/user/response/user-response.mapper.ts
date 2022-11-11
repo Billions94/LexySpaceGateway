@@ -3,23 +3,29 @@ import { Post, User } from '../../dto';
 
 @Injectable()
 export class UserResponseMapper {
-  map(data: any): User {
+  mapUsers(data: any): User[] {
+    return Array.isArray(data)
+      ? data.map((userData: any) => this.map(userData))
+      : [];
+  }
+
+  map(userData: any): User {
     return {
-      id: data._id ?? '',
-      firstName: data.firstName,
-      lastName: data.lastName,
-      userName: data.userName,
-      email: data.email,
-      bio: data.bio,
-      refreshToken: data.refreshToken,
-      location: data.location,
-      image: data.image,
-      cover: data.cover,
-      followers: data.followers,
-      following: data.following,
-      activities: this.mapActivities(data.activities),
-      session: data.session,
-      isVerified: data.isVerified,
+      id: userData._id ?? '',
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      userName: userData.userName,
+      email: userData.email,
+      bio: userData.bio,
+      refreshToken: userData.refreshToken,
+      location: userData.location,
+      image: userData.image,
+      cover: userData.cover,
+      followers: userData.followers,
+      following: userData.following,
+      activities: this.mapActivities(userData.activities),
+      session: userData.session,
+      isVerified: userData.isVerified,
     };
   }
 

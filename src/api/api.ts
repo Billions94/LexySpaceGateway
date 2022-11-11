@@ -4,7 +4,7 @@ import { PostsRequestHandler } from './request/handlers/posts-request.handler';
 import { UserRegisterRequestHandler } from './request/handlers/user-register-request.handler';
 import { PostUpdateRequestHandler } from './request/handlers/post-update-request.handler';
 import { PostDeleteRequestHandler } from './request/handlers/post-delete-request.handler';
-import { UserRequestHandler } from './request/handlers/user-request.handler';
+import { UserGetRequestHandler } from './request/handlers/user-get-request.handler';
 import { UserUpdateRequestHandler } from './request/handlers/user-update-request.handler';
 import { UserDeleteRequestHandler } from './request/handlers/user-delete-request.handler';
 import { PostCreateRequestHandler } from './request/handlers/post-create-request.handler';
@@ -19,11 +19,13 @@ import { ReplyGetRequestHandler } from './request/handlers/reply-get-request.han
 import { ReplyUpdateRequestHandler } from './request/handlers/reply-update-request.handler';
 import { ReplyDeleteRequestHandler } from './request/handlers/reply-delete-request.handler';
 import { PostLikeRequestHandler } from './request/handlers/post-like-request.handler';
+import { UsersRequestHandler } from './request/handlers/users-request.handler';
 
 const requestHandler: { [key: string]: any } = {
   REGISTER: UserRegisterRequestHandler,
   LOGIN: UserLoginRequestHandler,
-  USER: UserRequestHandler,
+  USER: UserGetRequestHandler,
+  USERS: UsersRequestHandler,
   UPDATE_USER: UserUpdateRequestHandler,
   DELETE_USER: UserDeleteRequestHandler,
   CREATE_POST: PostCreateRequestHandler,
