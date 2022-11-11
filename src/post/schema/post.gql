@@ -6,6 +6,7 @@ type Query {
 type Mutation {
   addPost(input: PostInput): Post!
   updatePost(postId: String, input: PostInput): Post!
+  addPostLike(postId: String): Boolean!
   deletePost(postId: String): Boolean!
 }
 

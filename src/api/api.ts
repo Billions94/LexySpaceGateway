@@ -18,6 +18,7 @@ import { RepliesRequestHandler } from './request/handlers/replies-request.handle
 import { ReplyGetRequestHandler } from './request/handlers/reply-get-request.handler';
 import { ReplyUpdateRequestHandler } from './request/handlers/reply-update-request.handler';
 import { ReplyDeleteRequestHandler } from './request/handlers/reply-delete-request.handler';
+import { PostLikeRequestHandler } from './request/handlers/post-like-request.handler';
 
 const requestHandler: { [key: string]: any } = {
   REGISTER: UserRegisterRequestHandler,
@@ -29,6 +30,7 @@ const requestHandler: { [key: string]: any } = {
   POSTS: PostsRequestHandler,
   GET_POST: PostGetRequestHandler,
   UPDATE_POST: PostUpdateRequestHandler,
+  POST_LIKE: PostLikeRequestHandler,
   DELETE_POST: PostDeleteRequestHandler,
   CREATE_COMMENT: CommentCreateRequestHandler,
   COMMENTS: CommentsRequestHandler,

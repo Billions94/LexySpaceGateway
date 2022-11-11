@@ -51,6 +51,7 @@ export abstract class IMutation {
     deleteComment: boolean;
     addPost: Post;
     updatePost: Post;
+    addPostLike: boolean;
     deletePost: boolean;
     addReply: Reply;
     updateReply: Reply;

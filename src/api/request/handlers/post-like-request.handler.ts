@@ -2,11 +2,12 @@ import { RequestInit } from 'apollo-server-env';
 import { PatchRequestHandlerInterface } from '../../../core/request/patch-request-handler.interface';
 import { AbstractRequestHandler } from './abstract-request.handler';
 
-export class PostUpdateRequestHandler
+export class PostLikeRequestHandler
   extends AbstractRequestHandler
   implements PatchRequestHandlerInterface
 {
-  protected path = 'posts/{postId}';
+
+  protected path = 'posts/{postId}/likes';
 
   async patch(body: any, params?: URLSearchParams, init?: RequestInit) {
     init = this.forwardAuthHeader(init);

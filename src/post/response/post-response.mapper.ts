@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { MapperUtil } from 'src/core/util';
 import { Post, User } from '../../dto';
 
@@ -24,8 +24,14 @@ export class PostResponseMapper {
   }
 
   private mapAuthor(author: any): User {
+    if (!author._id) {
+      return {
+        id: author
+      } as User;
+    }
+
     return {
-      id: author._id ?? '',
+      id: author._id,
       userName: author.userName,
       firstName: author.firstName,
       lastName: author.lastName,

@@ -10,6 +10,7 @@ import { PostResponseMapper } from './response/post-response.mapper';
 import { PostDeleteRequestService } from './request/service/post-delete-request.service';
 import { PostCreateRequestService } from './request/service/post-create-request.service';
 import { UserModule } from 'src/user/user.module';
+import { PostLikeRequestService } from './request/service/post-like-request.service';
 
 
 @Module({
@@ -26,6 +27,7 @@ import { UserModule } from 'src/user/user.module';
     PostsRequestService,
     PostGetRequestService,
     PostUpdateRequestService,
+    PostLikeRequestService,
     PostDeleteRequestService,
 
     // Response mapper

@@ -6,6 +6,7 @@ import { PostsRequestService } from '../request/service/posts-request.service';
 import { PostUpdateRequestService } from '../request/service/post-update-request.service';
 import { PostDeleteRequestService } from '../request/service/post-delete-request.service';
 import { PostCreateRequestService } from '../request/service/post-create-request.service';
+import { PostLikeRequestService } from '../request/service/post-like-request.service';
 
 @Resolver(() => Post)
 @Injectable()
@@ -15,7 +16,8 @@ export class PostResolver {
     private postsRequestService: PostsRequestService,
     private postGetRequestService: PostGetRequestService,
     private postUpdateRequestService: PostUpdateRequestService,
-    private postDeleteRequestService: PostDeleteRequestService,
+    private postLikesRequestService: PostLikeRequestService,
+    private postDeleteRequestService: PostDeleteRequestService
   ) {}
 
   @Query(() => [Post])
@@ -39,6 +41,11 @@ export class PostResolver {
     @Args('input') input: PostInput
   ): Promise<Post> {
     return this.postUpdateRequestService.execute(postId, input);
+  }
+
+  @Mutation(() => Boolean)
+  async addPostLike(@Args('postId') postId: string): Promise<boolean> {
+    return this.postLikesRequestService.execute(postId);
   }
 
   @Mutation(() => Boolean)
