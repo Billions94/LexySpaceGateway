@@ -21,12 +21,22 @@ export class UserResponseMapper {
       location: userData.location,
       image: userData.image,
       cover: userData.cover,
-      followers: userData.followers,
-      following: userData.following,
+      followers: this.mapFollowers(userData.followers),
+      following: this.mapFollowers(userData.following),
       activities: this.mapActivities(userData.activities),
       session: userData.session,
       isVerified: userData.isVerified,
     };
+  }
+
+  private mapFollowers(data: any): User[] {
+    return Array.isArray(data)
+      ? data.map((userID: any) => {
+          return {
+            id: userID ?? '',
+          } as User;
+        })
+      : [];
   }
 
   private mapActivities(activityData: any): Post[] {

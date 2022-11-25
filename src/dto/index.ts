@@ -97,6 +97,7 @@ export class Post {
     author: User;
     comments?: Nullable<Nullable<Comment>[]>;
     likes?: Nullable<Nullable<User>[]>;
+    createdAt?: Nullable<string>;
 }
 
 export class Reply {

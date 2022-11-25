@@ -1,6 +1,6 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { MapperUtil } from 'src/core/util';
-import { Post, User } from '../../dto';
+import { Comment, Post, User } from '../../dto';
 
 @Injectable()
 export class PostResponseMapper {
@@ -8,7 +8,7 @@ export class PostResponseMapper {
     const postData = MapperUtil.getData(data).posts;
 
     return Array.isArray(postData)
-      ? postData.map((post) => this.mapPostData(post))
+      ? postData.reverse().map((post) => this.mapPostData(post))
       : [];
   }
 
@@ -18,15 +18,30 @@ export class PostResponseMapper {
       content: post.text,
       media: post.media,
       author: this.mapAuthor(post.user),
-      comments: post.comments,
+      comments: this.mapComment(post.comments),
       likes: this.mapLikes(post.likes),
+      createdAt: post.createdAt ?? new Date(),
     };
+  }
+
+  private mapComment(data: any): Comment[] {
+    return Array.isArray(data)
+      ? data.map((comment: any) => {
+          return {
+            id: comment._id,
+            author: this.mapAuthor(comment.user),
+            content: comment.content,
+            media: comment.media,
+            postId: comment.postId,
+          } as Comment;
+        })
+      : [];
   }
 
   private mapAuthor(author: any): User {
     if (!author._id) {
       return {
-        id: author
+        id: author,
       } as User;
     }
 
@@ -55,7 +70,7 @@ export class PostResponseMapper {
           return {
             id: item._id ?? '',
             firstName: item.firstName,
-            lastName: item.lastName
+            lastName: item.lastName,
           } as User;
         })
       : [];
