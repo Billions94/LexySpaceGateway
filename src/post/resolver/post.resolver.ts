@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Inject, Injectable } from '@nestjs/common';
+import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { Post, PostInput } from '../../dto';
 import { PostGetRequestService } from '../request/service/post-get-request.service';
 import { PostsRequestService } from '../request/service/posts-request.service';
@@ -7,6 +7,12 @@ import { PostUpdateRequestService } from '../request/service/post-update-request
 import { PostDeleteRequestService } from '../request/service/post-delete-request.service';
 import { PostCreateRequestService } from '../request/service/post-create-request.service';
 import { PostLikeRequestService } from '../request/service/post-like-request.service';
+import { PUB_SUB } from '../../pubsub/pubsub.module';
+import { RedisPubSub } from 'graphql-redis-subscriptions';
+
+enum SUBSCRIPTION_EVENTS {
+  newPost = 'newPost',
+}
 
 @Resolver(() => Post)
 @Injectable()
@@ -17,7 +23,8 @@ export class PostResolver {
     private postGetRequestService: PostGetRequestService,
     private postUpdateRequestService: PostUpdateRequestService,
     private postLikesRequestService: PostLikeRequestService,
-    private postDeleteRequestService: PostDeleteRequestService
+    private postDeleteRequestService: PostDeleteRequestService,
+    // @Inject(PUB_SUB) private pubSub: RedisPubSub
   ) {}
 
   @Query(() => [Post])
@@ -32,8 +39,14 @@ export class PostResolver {
 
   @Mutation(() => Post)
   async addPost(@Args('input') input: PostInput): Promise<Post> {
+    // this.pubSub.publish(SUBSCRIPTION_EVENTS.newPost, { newPost: Post });
     return this.postCreateRequestService.execute(input);
   }
+
+  // @Subscription()
+  // newPost() {
+  //   return this.pubSub.asyncIterator(SUBSCRIPTION_EVENTS.newPost);
+  // }
 
   @Mutation(() => Post)
   async updatePost(

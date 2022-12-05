@@ -11,10 +11,10 @@ export class UserResponseMapper {
 
   map(userData: any): User {
     return {
-      id: userData._id ?? '',
+      id: userData._id ?? userData,
       firstName: userData.firstName,
       lastName: userData.lastName,
-      userName: userData.userName,
+      userName: userData.userName ?? '',
       email: userData.email,
       bio: userData.bio,
       refreshToken: userData.refreshToken,
@@ -26,17 +26,12 @@ export class UserResponseMapper {
       activities: this.mapActivities(userData.activities),
       session: userData.session,
       isVerified: userData.isVerified,
+      createdAt: userData.createdAt,
     };
   }
 
   private mapFollowers(data: any): User[] {
-    return Array.isArray(data)
-      ? data.map((userID: any) => {
-          return {
-            id: userID ?? '',
-          } as User;
-        })
-      : [];
+    return Array.isArray(data) ? data.map((user: any) => this.map(user)) : [];
   }
 
   private mapActivities(activityData: any): Post[] {

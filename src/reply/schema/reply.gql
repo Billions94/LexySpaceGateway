@@ -16,6 +16,7 @@ type Reply {
   media: String
   author: User
   commentId: String!
+  createdAt: Date
 }
 
 input ReplyInput {

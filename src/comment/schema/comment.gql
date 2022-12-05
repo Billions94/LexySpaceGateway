@@ -16,6 +16,7 @@ type Comment {
   author: User
   postId: String!
   replies: [Reply]
+  createdAt: Date
 }
 
 input CommentInput {

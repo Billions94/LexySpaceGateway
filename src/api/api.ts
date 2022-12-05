@@ -20,11 +20,13 @@ import { ReplyUpdateRequestHandler } from './request/handlers/reply-update-reque
 import { ReplyDeleteRequestHandler } from './request/handlers/reply-delete-request.handler';
 import { PostLikeRequestHandler } from './request/handlers/post-like-request.handler';
 import { UsersRequestHandler } from './request/handlers/users-request.handler';
+import { UserByIdRequestHandler } from './request/handlers/user-by-id-request.handler';
 
 const requestHandler: { [key: string]: any } = {
   REGISTER: UserRegisterRequestHandler,
   LOGIN: UserLoginRequestHandler,
   USER: UserGetRequestHandler,
+  USER_BY_ID: UserByIdRequestHandler,
   USERS: UsersRequestHandler,
   UPDATE_USER: UserUpdateRequestHandler,
   DELETE_USER: UserDeleteRequestHandler,
