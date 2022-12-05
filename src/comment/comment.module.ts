@@ -9,9 +9,10 @@ import { CommentsRequestService } from './request/service/comments-request.servi
 import { CommentGetRequestService } from './request/service/comment-get-request.service';
 import { CommentUpdateRequestService } from './request/service/comment-update-request.service';
 import { CommentDeleteRequestService } from './request/service/comment-delete-request.service';
+import { UserModule } from '../user/user.module';
 
 @Module({
-  imports: [CoreModule, ApiModule],
+  imports: [CoreModule, ApiModule, UserModule],
   providers: [
     // Resolver
     CommentResolver,

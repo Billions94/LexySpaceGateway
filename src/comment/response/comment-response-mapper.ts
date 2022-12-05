@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { MapperUtil } from 'src/core/util';
-import { Comment, Reply, User } from '../../dto';
+import { MapperUtil } from '../../core/util';
+import { UserResponseMapper } from '../../user/response/user-response.mapper';
+import { Comment, Reply } from '../../dto';
 
 @Injectable()
 export class CommentResponseMapper {
+  constructor(private userResponseMapper: UserResponseMapper) {}
+
   map(data: any): Comment[] {
     const commentData = MapperUtil.getData(data).comments;
 
@@ -17,29 +20,10 @@ export class CommentResponseMapper {
       id: comment._id,
       content: comment.content,
       media: comment.media,
-      author: this.mapAuthor(comment.user),
+      author: this.userResponseMapper.map(comment.user),
       replies: this.mapReplies(comment.replies),
       postId: comment.postId,
-    };
-  }
-
-  private mapAuthor(author: any): User {
-    return {
-      id: author._id ?? '',
-      userName: author.userName,
-      firstName: author.firstName,
-      lastName: author.lastName,
-      email: author.email,
-      location: author.location,
-      bio: author.bio,
-      image: author.image,
-      cover: author.cover,
-      followers: author.followers,
-      following: author.following,
-      activities: author.activities,
-      session: author.session,
-      refreshToken: author.refreshToken,
-      isVerified: author.isVerified,
+      createdAt: comment.createdAt,
     };
   }
 

@@ -76,6 +76,7 @@ export abstract class IQuery {
     getReplyById: Post;
     users: User[];
     user: User;
+    userById: User;
 }
 
 export class Comment {
@@ -86,6 +87,12 @@ export class Comment {
     author?: Nullable<User>;
     postId: string;
     replies?: Nullable<Nullable<Reply>[]>;
+    createdAt?: Nullable<Date>;
+}
+
+export abstract class ISubscription {
+    __typename?: 'ISubscription';
+    newPost?: Nullable<Post>;
 }
 
 export class Post {
@@ -93,11 +100,11 @@ export class Post {
     id: string;
     content: string;
     media?: Nullable<string>;
-    sharedPost?: Nullable<string>;
+    sharedPost?: Nullable<Post>;
     author: User;
     comments?: Nullable<Nullable<Comment>[]>;
     likes?: Nullable<Nullable<User>[]>;
-    createdAt?: Nullable<string>;
+    createdAt?: Nullable<Date>;
 }
 
 export class Reply {
@@ -107,6 +114,7 @@ export class Reply {
     media?: Nullable<string>;
     author?: Nullable<User>;
     commentId: string;
+    createdAt?: Nullable<Date>;
 }
 
 export class User {
@@ -118,7 +126,7 @@ export class User {
     email?: Nullable<string>;
     followers?: Nullable<Nullable<User>[]>;
     following?: Nullable<Nullable<User>[]>;
-    refreshToken: string;
+    refreshToken?: Nullable<string>;
     bio?: Nullable<string>;
     location?: Nullable<string>;
     image?: Nullable<string>;
@@ -126,6 +134,9 @@ export class User {
     session?: Nullable<string>;
     activities?: Nullable<Nullable<Post>[]>;
     isVerified?: Nullable<boolean>;
+    createdAt?: Nullable<Date>;
 }
 
+export type DateTime = any;
+export type DateRegister = any;
 type Nullable<T> = T | null;

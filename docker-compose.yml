@@ -4,16 +4,24 @@ services:
   gateway:
     build: .
     ports:
-      - 3000:3000
+      - 3001:3001
     networks:
       - lexyspace_be_common_network
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
+    depends_on: 
+      - redis
+    env_file: .env
     command: npm run start:docker
     environment:
       PORT: 3000
     restart: unless-stopped
+
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - 6379:${REDIS_PORT}
 networks: 
   lexyspace_be_common_network:
     external: true

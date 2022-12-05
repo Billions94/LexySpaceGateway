@@ -1,0 +1,8 @@
+# format (YYYY-MM-DD HH:II:SS)
+scalar DateTime
+
+# format (YYYY-MM-DD)
+scalar Date
+
+# format (MM/YYYY)
+scalar DateRegister

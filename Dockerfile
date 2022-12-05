@@ -10,6 +10,8 @@ RUN npm install glob rimraf
 RUN npm install
 RUN npm install -g ts-node
 
+RUN npm install graphql-redis-subscriptions
+
 COPY . .
 
 RUN ts-node generate-typings.ts

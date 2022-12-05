@@ -1,6 +1,7 @@
 type Query {
   users: [User!]!
   user: User!
+  userById(userId: String): User!
 }
 
 type Mutation {
@@ -16,7 +17,7 @@ type User {
   email: String
   followers: [User]
   following: [User]
-  refreshToken: String!
+  refreshToken: String
   bio: String
   location: String
   image: String
@@ -24,6 +25,7 @@ type User {
   session: String
   activities: [Post]
   isVerified: Boolean
+  createdAt: Date
 }
 
 input UserInput {

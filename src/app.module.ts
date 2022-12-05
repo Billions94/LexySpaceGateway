@@ -9,6 +9,7 @@ import { ReplyModule } from './reply/reply.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { PubsubModule } from './pubsub/pubsub.module';
 
 @Module({
   imports: [
@@ -19,7 +20,11 @@ import { AuthModule } from './auth/auth.module';
       driver: ApolloDriver,
       context: ({ req }) => ({ req }),
       typePaths: ['./**/*.gql'],
+      installSubscriptionHandlers: true,
       debug: true,
+      subscriptions: {
+        'subscriptions-transport-ws': true,
+      },
     }),
     ApiModule,
     CoreModule,
