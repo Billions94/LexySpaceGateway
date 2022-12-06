@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { MapperUtil } from 'src/core/util';
-import { Comment, Reply, User } from '../../dto';
+import { UserResponseMapper } from '../../user/response/user-response.mapper';
+import { Reply } from '../../dto';
 
 @Injectable()
 export class ReplyResponseMapper {
+  constructor(private userResponseMapper: UserResponseMapper) {}
+
   map(data: any): Reply[] {
     return Array.isArray(data)
       ? data.map((reply) => this.mapReplyData(reply))
@@ -11,32 +13,19 @@ export class ReplyResponseMapper {
   }
 
   mapReplyData(replyData: any): Reply {
+    if (typeof replyData === 'string') {
+      return {
+        id: replyData,
+      } as Reply;
+    }
+
     return {
       id: replyData._id,
       content: replyData.text,
       media: replyData.media,
-      author: this.mapAuthor(replyData.user),
+      author: this.userResponseMapper.map(replyData.user),
       commentId: replyData.commentId,
-    };
-  }
-
-  private mapAuthor(author: any): User {
-    return {
-      id: author._id ?? '',
-      userName: author.userName,
-      firstName: author.firstName,
-      lastName: author.lastName,
-      email: author.email,
-      location: author.location,
-      bio: author.bio,
-      image: author.image,
-      cover: author.cover,
-      followers: author.followers,
-      following: author.following,
-      activities: author.activities,
-      session: author.session,
-      refreshToken: author.refreshToken,
-      isVerified: author.isVerified,
+      createdAt: replyData.createdAt,
     };
   }
 }

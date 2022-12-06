@@ -1,15 +1,15 @@
 import { Injectable } from "@nestjs/common";
-import { AuthUserInput } from '../../../dto';
+import { RegisterUserInput } from '../../../dto';
 
 
 @Injectable()
 export class AuthRequestMapper {
-  map(input: AuthUserInput) {
+  map(input: RegisterUserInput) {
     return {
       userName: input.userName,
       email: input.email,
       password: input.password,
-      confirmPassword: input.confirmPassword
+      confirmPassword: input.confirmPassword,
     };
   }
 }

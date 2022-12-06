@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { api } from '../../../api/api';
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
-import { Post } from '../../../dto';
 import { PostResponseMapper } from '../../response/post-response.mapper';
+import { Post } from '../../../dto';
+import { api } from '../../../api/api';
 
 @Injectable()
 export class PostGetRequestService extends AbstractRequestService {

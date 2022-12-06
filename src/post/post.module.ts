@@ -9,12 +9,12 @@ import { PostResolver } from './resolver/post.resolver';
 import { PostResponseMapper } from './response/post-response.mapper';
 import { PostDeleteRequestService } from './request/service/post-delete-request.service';
 import { PostCreateRequestService } from './request/service/post-create-request.service';
-import { UserModule } from 'src/user/user.module';
+import { UserModule } from '../user/user.module';
 import { PostLikeRequestService } from './request/service/post-like-request.service';
-
+import { CommentModule } from '../comment/comment.module';
 
 @Module({
-  imports: [CoreModule, ApiModule, UserModule],
+  imports: [CoreModule, ApiModule, UserModule, CommentModule],
   providers: [
     // Resolvers
     PostResolver,

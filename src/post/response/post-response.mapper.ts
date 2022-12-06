@@ -1,17 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { MapperUtil } from '../..//core/util';
 import { UserResponseMapper } from '../../user/response/user-response.mapper';
-import { Comment, Post, User } from '../../dto';
+import { Post, User } from '../../dto';
+import { CommentResponseMapper } from '../../comment/response/comment-response-mapper';
 
 @Injectable()
 export class PostResponseMapper {
-  constructor(private userResponseMapper: UserResponseMapper) {}
+  constructor(
+    private userResponseMapper: UserResponseMapper,
+    private commentResponseMapper: CommentResponseMapper
+  ) {}
 
   map(data: any): Post[] {
     const postData = MapperUtil.getData(data).posts;
 
     return Array.isArray(postData)
-      ? postData.reverse().map((post) => this.mapPostData(post))
+      ? postData.map((post) => this.mapPostData(post))
       : [];
   }
 
@@ -22,24 +26,10 @@ export class PostResponseMapper {
       media: post.media,
       sharedPost: post.sharedPost,
       author: this.userResponseMapper.map(post.user),
-      comments: this.mapComment(post.comments),
+      comments: this.commentResponseMapper.map(post.comments),
       likes: this.mapLikes(post.likes),
       createdAt: post.createdAt ?? new Date(),
     };
-  }
-
-  private mapComment(data: any): Comment[] {
-    return Array.isArray(data)
-      ? data.map((comment: any) => {
-          return {
-            id: comment._id,
-            author: this.userResponseMapper.map(comment.user),
-            content: comment.content,
-            media: comment.media,
-            postId: comment.postId,
-          } as Comment;
-        })
-      : [];
   }
 
   private mapLikes(data: any): User[] {

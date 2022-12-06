@@ -1,25 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { AuthResponseMapper } from 'src/auth/response/auth-response.mapper';
-import { api } from '../../../api/api';
+import { AuthResponseMapper } from '../../../auth/response/auth-response.mapper';
+import { SessionRequestMapper } from '../../../session/request/mapper/session-request.mapper';
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
-import { AuthResponse, AuthUserInput } from '../../../dto';
-import { AuthRequestMapper } from '../mapper/auth-request.mapper';
+import { AuthResponse, SessionInput } from '../../../dto';
+import { api } from '../../../api/api';
 
 @Injectable()
 export class AuthLoginRequestService extends AbstractRequestService {
   constructor(
-    private authRequestMapper: AuthRequestMapper,
+    private sessionRequestMapper: SessionRequestMapper,
     private authResponseMapper: AuthResponseMapper
   ) {
     super();
   }
 
-  async execute(input: AuthUserInput): Promise<AuthResponse> {
+  async execute(input: SessionInput): Promise<AuthResponse> {
     const requestHandler = this.requestHandlerFactory.createPostRequest(
       api.handler.LOGIN
     );
 
-    const requestBody = this.authRequestMapper.map(input);
+    const requestBody = this.sessionRequestMapper.map(input);
 
     const response = await this.handlePostRequest(requestHandler, requestBody);
 
