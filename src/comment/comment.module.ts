@@ -10,9 +10,10 @@ import { CommentGetRequestService } from './request/service/comment-get-request.
 import { CommentUpdateRequestService } from './request/service/comment-update-request.service';
 import { CommentDeleteRequestService } from './request/service/comment-delete-request.service';
 import { UserModule } from '../user/user.module';
+import { ReplyModule } from '../reply/reply.module';
 
 @Module({
-  imports: [CoreModule, ApiModule, UserModule],
+  imports: [CoreModule, ApiModule, UserModule, ReplyModule],
   providers: [
     // Resolver
     CommentResolver,
@@ -30,5 +31,6 @@ import { UserModule } from '../user/user.module';
     // Response mapper
     CommentResponseMapper,
   ],
+  exports: [CommentResponseMapper],
 })
 export class CommentModule {}

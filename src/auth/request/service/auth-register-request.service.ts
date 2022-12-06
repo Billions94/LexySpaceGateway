@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { AuthResponseMapper } from 'src/auth/response/auth-response.mapper';
 import { api } from '../../../api/api';
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
-import { AuthResponse, AuthUserInput } from '../../../dto';
+import { AuthResponse, RegisterUserInput } from '../../../dto';
 import { AuthRequestMapper } from '../mapper/auth-request.mapper';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class AuthRegisterRequestService extends AbstractRequestService {
     super();
   }
 
-  async execute(input: AuthUserInput): Promise<AuthResponse> {
+  async execute(input: RegisterUserInput): Promise<AuthResponse> {
     const requestHandler = this.requestHandlerFactory.createPostRequest(
       api.handler.REGISTER
     );

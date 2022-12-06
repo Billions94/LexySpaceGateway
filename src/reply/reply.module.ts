@@ -9,9 +9,10 @@ import { RepliessRequestService } from './request/service/replies-request.servic
 import { ReplyGetRequestService } from './request/service/reply-get-request.service';
 import { ReplyUpdateRequestService } from './request/service/reply-update-request.service';
 import { ReplyDeleteRequestService } from './request/service/reply-delete-request.service';
+import { UserModule } from '../user/user.module';
 
 @Module({
-  imports: [CoreModule, ApiModule],
+  imports: [CoreModule, ApiModule, UserModule],
   providers: [
     // Resolver
     ReplyResolver,
@@ -29,5 +30,6 @@ import { ReplyDeleteRequestService } from './request/service/reply-delete-reques
     // Response mapper
     ReplyResponseMapper,
   ],
+  exports: [ReplyResponseMapper],
 })
 export class ReplyModule {}

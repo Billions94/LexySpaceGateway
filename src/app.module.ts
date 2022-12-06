@@ -10,6 +10,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { PubsubModule } from './pubsub/pubsub.module';
+import { SessionModule } from './session/session.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { PubsubModule } from './pubsub/pubsub.module';
     CommentModule,
     ReplyModule,
     AuthModule,
+    SessionModule,
   ],
 })
 export class AppModule {}

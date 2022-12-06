@@ -8,11 +8,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export class AuthUserInput {
-    userName?: Nullable<string>;
+export class RegisterUserInput {
+    userName: string;
     email: string;
     password: string;
-    confirmPassword?: Nullable<string>;
+    confirmPassword: string;
 }
 
 export class CommentInput {
@@ -29,6 +29,11 @@ export class PostInput {
 export class ReplyInput {
     content: string;
     media?: Nullable<string>;
+}
+
+export class SessionInput {
+    email: string;
+    password: string;
 }
 
 export class UserInput {
@@ -56,6 +61,7 @@ export abstract class IMutation {
     addReply: Reply;
     updateReply: Reply;
     deleteReply: boolean;
+    deleteSession?: Nullable<boolean>;
     updateUser: User;
     deleteUser: boolean;
 }
@@ -74,6 +80,7 @@ export abstract class IQuery {
     getPostById: Post;
     replies: Reply[];
     getReplyById: Post;
+    sessions?: Nullable<Session[]>;
     users: User[];
     user: User;
     userById: User;
@@ -115,6 +122,13 @@ export class Reply {
     author?: Nullable<User>;
     commentId: string;
     createdAt?: Nullable<Date>;
+}
+
+export class Session {
+    __typename?: 'Session';
+    user: User;
+    isValid: boolean;
+    userAgent?: Nullable<string>;
 }
 
 export class User {

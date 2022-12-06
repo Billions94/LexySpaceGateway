@@ -21,10 +21,14 @@ import { ReplyDeleteRequestHandler } from './request/handlers/reply-delete-reque
 import { PostLikeRequestHandler } from './request/handlers/post-like-request.handler';
 import { UsersRequestHandler } from './request/handlers/users-request.handler';
 import { UserByIdRequestHandler } from './request/handlers/user-by-id-request.handler';
+import { SessionGetRequestHandler } from './request/handlers/session-get-request.handler';
+import { SessionDeleteRequestHandler } from './request/handlers/session-delete-request.handler';
 
 const requestHandler: { [key: string]: any } = {
   REGISTER: UserRegisterRequestHandler,
   LOGIN: UserLoginRequestHandler,
+  SESSIONS: SessionGetRequestHandler,
+  DELETE_SESSION: SessionDeleteRequestHandler,
   USER: UserGetRequestHandler,
   USER_BY_ID: UserByIdRequestHandler,
   USERS: UsersRequestHandler,
