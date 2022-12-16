@@ -1,5 +1,5 @@
 import { Scalar, CustomScalar } from '@nestjs/graphql';
-import { GraphQLScalarLiteralParser, Kind, ValueNode } from 'graphql';
+import { Kind, ValueNode } from 'graphql';
 import moment from 'moment';
 import { UserInputError } from 'apollo-server-express';
 

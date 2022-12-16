@@ -18,7 +18,7 @@ export class ReplyDeleteRequestService extends AbstractRequestService {
       parameterHandler
     );
 
-    if (isDeleted) {
+    if (isDeleted === true) {
       return true;
     }
 

@@ -9,9 +9,11 @@ export class SessionDeleteRequestService extends AbstractRequestService {
       api.handler.DELETE_SESSION
     );
 
-    const result = await this.handleDeleteRequest(requestHandler);
+    const { accessToken, refreshToken } = await this.handleDeleteRequest(
+      requestHandler
+    );
 
-    if (result.accessToken === null && result.refreshToken === null) {
+    if (!accessToken && !refreshToken) {
       return true;
     }
 

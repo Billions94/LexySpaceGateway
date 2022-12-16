@@ -95,6 +95,7 @@ export class Comment {
     postId: string;
     replies?: Nullable<Nullable<Reply>[]>;
     createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
 }
 
 export abstract class ISubscription {
@@ -112,6 +113,7 @@ export class Post {
     comments?: Nullable<Nullable<Comment>[]>;
     likes?: Nullable<Nullable<User>[]>;
     createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
 }
 
 export class Reply {
@@ -122,6 +124,7 @@ export class Reply {
     author?: Nullable<User>;
     commentId: string;
     createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
 }
 
 export class Session {
@@ -149,6 +152,7 @@ export class User {
     activities?: Nullable<Nullable<Post>[]>;
     isVerified?: Nullable<boolean>;
     createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
 }
 
 export type DateTime = any;

@@ -17,6 +17,7 @@ type Reply {
   author: User
   commentId: String!
   createdAt: Date
+  updatedAt: Date
 }
 
 input ReplyInput {

@@ -23,6 +23,7 @@ type Post {
   comments: [Comment]
   likes: [User]
   createdAt: Date
+  updatedAt: Date
 }
 
 input PostInput {

@@ -34,6 +34,7 @@ export class CommentResponseMapper {
       replies: this.replyResponseMapper.map(comment.replies),
       postId: comment.postId,
       createdAt: comment.createdAt,
+      updatedAt: comment.updatedAt
     };
   }
 }

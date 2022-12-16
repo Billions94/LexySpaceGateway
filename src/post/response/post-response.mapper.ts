@@ -29,6 +29,7 @@ export class PostResponseMapper {
       comments: this.commentResponseMapper.map(post.comments),
       likes: this.mapLikes(post.likes),
       createdAt: post.createdAt ?? new Date(),
+      updatedAt: post.updatedAt
     };
   }
 

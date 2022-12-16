@@ -27,6 +27,7 @@ export class UserResponseMapper {
       session: userData.session,
       isVerified: userData.isVerified,
       createdAt: userData.createdAt,
+      updatedAt: userData.updatedAt
     };
   }
 

@@ -26,6 +26,7 @@ type User {
   activities: [Post]
   isVerified: Boolean
   createdAt: Date
+  updatedAt: Date
 }
 
 input UserInput {
