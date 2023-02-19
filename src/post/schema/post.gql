@@ -1,6 +1,6 @@
 type Query {
-  posts: [Post!]!
-  getPostById(postId: String): Post!
+  posts: [Post!]! @cacheControl(maxAge: 360)
+  getPostById(postId: String): Post! @cacheControl(maxAge: 360)
 }
 
 type Mutation {
@@ -14,7 +14,7 @@ type Subscription {
   newPost: Post
 }
 
-type Post {
+type Post @cacheControl(inheritMaxAge: true) {
   id: ID!
   content: String!
   media: String

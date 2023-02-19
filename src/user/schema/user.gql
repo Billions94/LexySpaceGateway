@@ -1,7 +1,7 @@
 type Query {
-  users: [User!]!
-  user: User!
-  userById(userId: String): User!
+  users: [User!]! @cacheControl(maxAge: 360)
+  user: User! @cacheControl(maxAge: 360)
+  userById(userId: String): User! @cacheControl(maxAge: 360)
 }
 
 type Mutation {

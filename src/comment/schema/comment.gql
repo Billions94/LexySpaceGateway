@@ -1,6 +1,6 @@
 type Query {
-  comments: [Comment!]!
-  getCommentById(commentId: String): Comment!
+  comments: [Comment!]! @cacheControl(maxAge: 360)
+  getCommentById(commentId: String): Comment! @cacheControl(maxAge: 360)
 }
 
 type Mutation {
@@ -9,7 +9,7 @@ type Mutation {
   deleteComment(commentId: String): Boolean!
 }
 
-type Comment {
+type Comment @cacheControl(inheritMaxAge: true) {
   id: ID!
   content: String!
   media: String
