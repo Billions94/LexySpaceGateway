@@ -20,6 +20,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
+    "pre-commit": "npm run generate && npm run test && npm run test:e2e && npm run lint && npm run format",
     "generate": "ts-node generate-typings.ts"
   },
   "dependencies": {
@@ -42,7 +43,7 @@
     "graphql-redis-subscriptions": "^2.5.0",
     "graphql-subscriptions": "^2.0.0",
     "moment": "^2.29.4",
-    "momment": "^0.0.1",
+    "nestjs-gql-cache-control": "^0.1.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
