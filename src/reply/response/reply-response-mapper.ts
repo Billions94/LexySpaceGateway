@@ -26,7 +26,7 @@ export class ReplyResponseMapper {
       author: this.userResponseMapper.map(replyData.user),
       commentId: replyData.commentId,
       createdAt: replyData.createdAt,
-      updatedAt: replyData.updatedAt
+      updatedAt: replyData.updatedAt,
     };
   }
 }

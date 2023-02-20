@@ -10,7 +10,7 @@ export class UserUpdateRequestHandler
 
   async patch(body: any, params?: URLSearchParams, init?: RequestInit) {
     init = this.forwardAuthHeader(init);
-    
+
     return await this.executePatchRequest(body, params, init);
   }
 }

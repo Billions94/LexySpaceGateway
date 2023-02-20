@@ -6,7 +6,6 @@ export class PostLikeRequestHandler
   extends AbstractRequestHandler
   implements PatchRequestHandlerInterface
 {
-
   protected path = 'posts/{postId}/likes';
 
   async patch(body: any, params?: URLSearchParams, init?: RequestInit) {

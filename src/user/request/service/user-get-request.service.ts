@@ -16,7 +16,7 @@ export class UserGetRequestService extends AbstractRequestService {
     );
 
     const response = await this.handleGetRequest(requestHandler);
-    
+
     return this.userResponseMapper.map(response);
   }
 }

@@ -29,7 +29,7 @@ export class UserUpdateRequestService extends AbstractRequestService {
       requestBody,
       parameterHandler
     );
-    
+
     return this.userResponseMapper.map(response);
   }
 }

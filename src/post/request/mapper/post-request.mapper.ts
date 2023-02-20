@@ -1,5 +1,5 @@
-import { Injectable } from "@nestjs/common";
-import { PostInput } from "src/dto";
+import { Injectable } from '@nestjs/common';
+import { PostInput } from 'src/dto';
 
 @Injectable()
 export class PostsRequestMapper {

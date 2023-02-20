@@ -16,7 +16,6 @@ import { RequestHandlerFactoryService } from '../../api/request/request-handler-
 import { ParameterHandlerFactoryService } from '../rest/factory/parameter-handler-factory.service';
 import { Scope } from '@sentry/node';
 
-
 export abstract class AbstractRequestService {
   @Inject(RequestHandlerFactoryService)
   protected requestHandlerFactory: RequestHandlerFactoryService;

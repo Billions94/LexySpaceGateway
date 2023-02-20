@@ -1,5 +1,5 @@
-import { Injectable } from "@nestjs/common";
-import { SessionInput } from "../../../dto";
+import { Injectable } from '@nestjs/common';
+import { SessionInput } from '../../../dto';
 
 @Injectable()
 export class SessionRequestMapper {

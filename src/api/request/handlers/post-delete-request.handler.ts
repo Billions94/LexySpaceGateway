@@ -10,7 +10,7 @@ export class PostDeleteRequestHandler
 
   async delete(params?: URLSearchParams, init?: RequestInit) {
     init = this.forwardAuthHeader(init);
-    
+
     return await this.executeDeleteRequest(params, init);
   }
 }

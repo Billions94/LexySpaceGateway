@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { CacheControl } from 'nestjs-gql-cache-control';
 import { Reply, ReplyInput } from '../../dto';
 import { RepliessRequestService } from '../request/service/replies-request.service';
 import { ReplyCreateRequestService } from '../request/service/reply-create-request.service';
@@ -19,11 +20,13 @@ export class ReplyResolver {
   ) {}
 
   @Query(() => [Reply])
+  @CacheControl({ maxAge: 360 })
   async replies(): Promise<Reply[]> {
     return this.repliesRequestService.execute();
   }
 
   @Query(() => Reply)
+  @CacheControl({ inheritMaxAge: true })
   async getReplyById(@Args('replyId') replyId: string): Promise<Reply> {
     return this.replyGetRequestService.execute(replyId);
   }

@@ -1,6 +1,6 @@
 type Query {
-  replies: [Reply!]! @cacheControl(maxAge: 360)
-  getReplyById(replyId: String): Post! @cacheControl(maxAge: 360)
+  replies: [Reply!]!
+  getReplyById(replyId: String): Post!
 }
 
 type Mutation {
@@ -9,8 +9,7 @@ type Mutation {
   deleteReply(replyId: String): Boolean!
 }
 
-
-type Reply @cacheControl(inheritMaxAge: true) {
+type Reply {
   id: ID!
   content: String!
   media: String

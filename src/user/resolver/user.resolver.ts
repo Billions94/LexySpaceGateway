@@ -6,6 +6,7 @@ import { UserDeleteRequestService } from '../request/service/user-delete.request
 import { UserGetRequestService } from '../request/service/user-get-request.service';
 import { UserUpdateRequestService } from '../request/service/user-update-request.service';
 import { UsersRequestService } from '../request/service/users-request.service';
+import { CacheControl } from 'nestjs-gql-cache-control';
 
 @Resolver(() => User)
 @Injectable()
@@ -19,15 +20,18 @@ export class UserResolver {
   ) {}
 
   @Query(() => [User])
+  @CacheControl({ maxAge: 360 })
   async users(): Promise<User[]> {
     return this.usersRequestService.execute();
   }
   @Query(() => User)
+  @CacheControl({ inheritMaxAge: true })
   async user(): Promise<User> {
     return this.userGetRequestService.execute();
   }
 
   @Query(() => User)
+  @CacheControl({ inheritMaxAge: true })
   async userById(@Args('userId') userId: string): Promise<User> {
     return this.userByIdRequestService.execute(userId);
   }
@@ -38,11 +42,6 @@ export class UserResolver {
 
     return this.userUpdateRequestService.execute(user.id, input);
   }
-
-  // @ResolveField('following', () => [User])
-  // async getFollowing(): Promise<User[]> {
-  //   return []
-  // }
 
   @Mutation(() => User)
   async deleteUser(@Args('userId') userId: string): Promise<boolean> {

@@ -9,7 +9,6 @@ import { PostRequestHandlerInterface } from '../../core/request/post-request-han
 import { PatchRequestHandlerInterface } from '../../core/request/patch-request-handler.interface';
 import { DeleteRequestHandlerInterface } from '../../core/request/delete-request-handler.interface';
 
-
 @Injectable()
 export class RequestHandlerFactoryService {
   constructor(

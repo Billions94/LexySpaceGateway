@@ -9,6 +9,7 @@ import { PostCreateRequestService } from '../request/service/post-create-request
 import { PostLikeRequestService } from '../request/service/post-like-request.service';
 import { PUB_SUB } from '../../pubsub/pubsub.module';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
+import { CacheControl } from 'nestjs-gql-cache-control';
 
 enum SUBSCRIPTION_EVENTS {
   newPost = 'newPost',
@@ -23,16 +24,17 @@ export class PostResolver {
     private postGetRequestService: PostGetRequestService,
     private postUpdateRequestService: PostUpdateRequestService,
     private postLikesRequestService: PostLikeRequestService,
-    private postDeleteRequestService: PostDeleteRequestService,
-    // @Inject(PUB_SUB) private pubSub: RedisPubSub
+    private postDeleteRequestService: PostDeleteRequestService // @Inject(PUB_SUB) private pubSub: RedisPubSub
   ) {}
 
   @Query(() => [Post])
+  @CacheControl({ maxAge: 360 })
   async posts(): Promise<Post[]> {
     return this.postsRequestService.execute();
   }
 
   @Query(() => Post)
+  @CacheControl({ inheritMaxAge: true })
   async getPostById(@Args('postId') postId: string): Promise<Post> {
     return this.postGetRequestService.execute(postId);
   }

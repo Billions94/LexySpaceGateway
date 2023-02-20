@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { CacheControl } from 'nestjs-gql-cache-control';
 import { Comment, CommentInput } from '../../dto';
 import { CommentCreateRequestService } from '../request/service/comment-create-request.service';
 import { CommentDeleteRequestService } from '../request/service/comment-delete-request.service';
@@ -19,11 +20,13 @@ export class CommentResolver {
   ) {}
 
   @Query(() => [Comment])
+  @CacheControl({ maxAge: 360 })
   async comments(): Promise<Comment[]> {
     return this.commentsRequestService.execute();
   }
 
   @Query(() => Comment)
+  @CacheControl({ inheritMaxAge: true })
   async getCommentById(@Args('commentId') commentId: string) {
     return this.commentGetRequestService.execute(commentId);
   }

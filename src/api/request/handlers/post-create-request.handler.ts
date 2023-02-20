@@ -10,7 +10,7 @@ export class PostCreateRequestHandler
 
   async post(body: any, params?: URLSearchParams, init?: RequestInit) {
     init = this.forwardAuthHeader(init);
-    
+
     return await this.executePostRequest(body, params, init);
   }
 }

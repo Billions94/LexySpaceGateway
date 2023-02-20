@@ -20,10 +20,7 @@ export class PostCreateRequestService extends AbstractRequestService {
 
     const requestBody = this.postRequestMapper.map(input);
 
-    const response = await this.handlePostRequest(
-      requestHandler,
-      requestBody,
-    );
+    const response = await this.handlePostRequest(requestHandler, requestBody);
 
     return this.postResponseMapper.mapPostData(response);
   }
