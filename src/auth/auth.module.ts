@@ -6,9 +6,10 @@ import { AuthRequestMapper } from './request/mapper/auth-request.mapper';
 import { AuthResponseMapper } from './response/auth-response.mapper';
 import { CoreModule } from '../core/core.module';
 import { ApiModule } from '../api/api.module';
+import { SessionModule } from '../session/session.module';
 
 @Module({
-  imports: [CoreModule, ApiModule],
+  imports: [CoreModule, ApiModule, SessionModule],
   providers: [
     // Resolver
     AuthResolver,

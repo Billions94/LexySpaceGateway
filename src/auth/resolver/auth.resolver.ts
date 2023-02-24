@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { AuthResponse, AuthUserInput } from '../../dto';
+import { AuthResponse, RegisterUserInput, SessionInput } from '../../dto';
 import { AuthLoginRequestService } from '../request/service/auth-login-request.service';
 import { AuthRegisterRequestService } from '../request/service/auth-register-request.service';
 
@@ -13,12 +13,14 @@ export class AuthResolver {
   ) {}
 
   @Mutation()
-  async register(@Args('input') input: AuthUserInput): Promise<AuthResponse> {
+  async register(
+    @Args('input') input: RegisterUserInput
+  ): Promise<AuthResponse> {
     return this.authRegisterRequestService.execute(input);
   }
 
   @Mutation()
-  async login(@Args('input') input: AuthUserInput): Promise<AuthResponse> {
+  async login(@Args('input') input: SessionInput): Promise<AuthResponse> {
     return this.authLoginRequestService.execute(input);
   }
 }

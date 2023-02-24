@@ -8,10 +8,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export class AuthUserInput {
-    userName?: Nullable<string>;
+export class RegisterUserInput {
+    userName: string;
     email: string;
     password: string;
+    confirmPassword: string;
 }
 
 export class CommentInput {
@@ -28,6 +29,11 @@ export class PostInput {
 export class ReplyInput {
     content: string;
     media?: Nullable<string>;
+}
+
+export class SessionInput {
+    email: string;
+    password: string;
 }
 
 export class UserInput {
@@ -50,10 +56,12 @@ export abstract class IMutation {
     deleteComment: boolean;
     addPost: Post;
     updatePost: Post;
+    addPostLike: boolean;
     deletePost: boolean;
     addReply: Reply;
     updateReply: Reply;
     deleteReply: boolean;
+    deleteSession?: Nullable<boolean>;
     updateUser: User;
     deleteUser: boolean;
 }
@@ -72,8 +80,10 @@ export abstract class IQuery {
     getPostById: Post;
     replies: Reply[];
     getReplyById: Post;
+    sessions?: Nullable<Session[]>;
     users: User[];
     user: User;
+    userById: User;
 }
 
 export class Comment {
@@ -81,9 +91,16 @@ export class Comment {
     id: string;
     content: string;
     media?: Nullable<string>;
-    user?: Nullable<User>;
-    post?: Nullable<Post>;
+    author?: Nullable<User>;
+    postId: string;
     replies?: Nullable<Nullable<Reply>[]>;
+    createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
+}
+
+export abstract class ISubscription {
+    __typename?: 'ISubscription';
+    newPost?: Nullable<Post>;
 }
 
 export class Post {
@@ -91,10 +108,12 @@ export class Post {
     id: string;
     content: string;
     media?: Nullable<string>;
-    sharedPost?: Nullable<string>;
+    sharedPost?: Nullable<Post>;
     author: User;
     comments?: Nullable<Nullable<Comment>[]>;
     likes?: Nullable<Nullable<User>[]>;
+    createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
 }
 
 export class Reply {
@@ -102,8 +121,17 @@ export class Reply {
     id: string;
     content: string;
     media?: Nullable<string>;
-    user?: Nullable<User>;
-    comment?: Nullable<Comment>;
+    author?: Nullable<User>;
+    commentId: string;
+    createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
+}
+
+export class Session {
+    __typename?: 'Session';
+    user: User;
+    isValid: boolean;
+    userAgent?: Nullable<string>;
 }
 
 export class User {
@@ -115,7 +143,7 @@ export class User {
     email?: Nullable<string>;
     followers?: Nullable<Nullable<User>[]>;
     following?: Nullable<Nullable<User>[]>;
-    refreshToken: string;
+    refreshToken?: Nullable<string>;
     bio?: Nullable<string>;
     location?: Nullable<string>;
     image?: Nullable<string>;
@@ -123,6 +151,10 @@ export class User {
     session?: Nullable<string>;
     activities?: Nullable<Nullable<Post>[]>;
     isVerified?: Nullable<boolean>;
+    createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
 }
 
+export type DateTime = any;
+export type DateRegister = any;
 type Nullable<T> = T | null;

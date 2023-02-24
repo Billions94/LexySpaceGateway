@@ -1,0 +1,18 @@
+type Query {
+  sessions: [Session!]
+}
+
+type Mutation {
+  deleteSession: Boolean
+}
+
+input SessionInput {
+  email: String!
+  password: String!
+}
+
+type Session {
+  user: User!
+  isValid: Boolean!
+  userAgent: String
+}

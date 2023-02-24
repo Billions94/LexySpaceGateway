@@ -4,18 +4,19 @@ type Query {
 }
 
 type Mutation {
-  addReply(input: ReplyInput): Reply!
+  addReply(commentId: String, input: ReplyInput): Reply!
   updateReply(replyId: String, input: ReplyInput): Reply!
   deleteReply(replyId: String): Boolean!
 }
-
 
 type Reply {
   id: ID!
   content: String!
   media: String
-  user: User
-  comment: Comment
+  author: User
+  commentId: String!
+  createdAt: Date
+  updatedAt: Date
 }
 
 input ReplyInput {

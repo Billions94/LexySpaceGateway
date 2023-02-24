@@ -8,10 +8,13 @@ import { PostUpdateRequestService } from './request/service/post-update-request.
 import { PostResolver } from './resolver/post.resolver';
 import { PostResponseMapper } from './response/post-response.mapper';
 import { PostDeleteRequestService } from './request/service/post-delete-request.service';
-
+import { PostCreateRequestService } from './request/service/post-create-request.service';
+import { UserModule } from '../user/user.module';
+import { PostLikeRequestService } from './request/service/post-like-request.service';
+import { CommentModule } from '../comment/comment.module';
 
 @Module({
-  imports: [CoreModule, ApiModule],
+  imports: [CoreModule, ApiModule, UserModule, CommentModule],
   providers: [
     // Resolvers
     PostResolver,
@@ -20,9 +23,11 @@ import { PostDeleteRequestService } from './request/service/post-delete-request.
     PostsRequestMapper,
 
     // Request service
+    PostCreateRequestService,
     PostsRequestService,
     PostGetRequestService,
     PostUpdateRequestService,
+    PostLikeRequestService,
     PostDeleteRequestService,
 
     // Response mapper

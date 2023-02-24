@@ -12,7 +12,7 @@ export class ErrorResponseHandler {
 
   getErrorMessage(): string {
     const responseErrors = this.getErrors();
-    let errorMessage = 'Unknown glue error.';
+    let errorMessage = 'Unknown api error.';
 
     if (responseErrors.length > 0) {
       // Set from error message array

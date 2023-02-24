@@ -6,15 +6,7 @@ import { AppLogger } from './logger/app-logger.service';
 
 @Module({
   imports: [],
-  providers: [
-    ParameterHandlerFactoryService,
-    RestCache,
-    AppLogger,
-  ],
-  exports: [
-    ParameterHandlerFactoryService,
-    RestCache,
-    AppLogger,
-  ],
+  providers: [ParameterHandlerFactoryService, RestCache, AppLogger],
+  exports: [ParameterHandlerFactoryService, RestCache, AppLogger],
 })
 export class CoreModule {}

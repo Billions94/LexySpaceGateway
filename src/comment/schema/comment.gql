@@ -4,7 +4,7 @@ type Query {
 }
 
 type Mutation {
-  addComment(input: CommentInput): Comment!
+  addComment(postId: String, input: CommentInput): Comment!
   updateComment(commentId: String, input: CommentInput): Comment!
   deleteComment(commentId: String): Boolean!
 }
@@ -13,9 +13,11 @@ type Comment {
   id: ID!
   content: String!
   media: String
-  user: User
-  post: Post
+  author: User
+  postId: String!
   replies: [Reply]
+  createdAt: Date
+  updatedAt: Date
 }
 
 input CommentInput {

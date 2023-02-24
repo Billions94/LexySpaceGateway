@@ -6,17 +6,24 @@ type Query {
 type Mutation {
   addPost(input: PostInput): Post!
   updatePost(postId: String, input: PostInput): Post!
+  addPostLike(postId: String): Boolean!
   deletePost(postId: String): Boolean!
+}
+
+type Subscription {
+  newPost: Post
 }
 
 type Post {
   id: ID!
   content: String!
   media: String
-  sharedPost: String
+  sharedPost: Post
   author: User!
   comments: [Comment]
   likes: [User]
+  createdAt: Date
+  updatedAt: Date
 }
 
 input PostInput {

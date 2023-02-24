@@ -1,12 +1,13 @@
 type Mutation {
-  register(input: AuthUserInput): AuthResponse
-  login(input: AuthUserInput): AuthResponse
+  register(input: RegisterUserInput): AuthResponse
+  login(input: SessionInput): AuthResponse
 }
 
-input AuthUserInput {
-  userName: String
+input RegisterUserInput {
+  userName: String!
   email: String!
   password: String!
+  confirmPassword: String!
 }
 
 type AuthResponse {

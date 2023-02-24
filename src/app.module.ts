@@ -9,6 +9,9 @@ import { ReplyModule } from './reply/reply.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { SessionModule } from './session/session.module';
+import responseCachePlugin from 'apollo-server-plugin-response-cache';
+import { ApolloServerPluginCacheControl } from 'apollo-server-core/dist/plugin/cacheControl';
 
 @Module({
   imports: [
@@ -19,7 +22,15 @@ import { AuthModule } from './auth/auth.module';
       driver: ApolloDriver,
       context: ({ req }) => ({ req }),
       typePaths: ['./**/*.gql'],
+      plugins: [
+        ApolloServerPluginCacheControl({ defaultMaxAge: 0 }),
+        responseCachePlugin(),
+      ],
+      installSubscriptionHandlers: true,
       debug: true,
+      subscriptions: {
+        'subscriptions-transport-ws': true,
+      },
     }),
     ApiModule,
     CoreModule,
@@ -28,6 +39,8 @@ import { AuthModule } from './auth/auth.module';
     CommentModule,
     ReplyModule,
     AuthModule,
+    SessionModule,
+    // PubsubModule,
   ],
 })
 export class AppModule {}
