@@ -13,6 +13,7 @@ export class UserDeleteRequestService extends AbstractRequestService {
     parameterHandler.append('userId', userId);
 
     await this.handleDeleteRequest(requestHandler, parameterHandler);
+    
     return true;
   }
 }
