@@ -7,10 +7,8 @@ COPY package*.json ./
 
 RUN npm install glob rimraf
 
-RUN npm install
+RUN npm install --only=development
 RUN npm install -g ts-node
-
-RUN npm install graphql-redis-subscriptions
 
 COPY . .
 

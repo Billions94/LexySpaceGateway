@@ -22,9 +22,7 @@ export class ApiDatasourceDecorator
   ) {
     super();
     super.initialize({ context, cache });
-    this.baseURL = process.env.API_BASE_URL
-      ? process.env.API_BASE_URL
-      : 'https://lexyspace-api.onrender.com/api';
+    this.baseURL = process.env.API_BASE_URL;
   }
 
   public get<TResult = any>(
