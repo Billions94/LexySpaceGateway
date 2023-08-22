@@ -5,62 +5,63 @@ import { Post, User } from '../../dto';
 export class UserResponseMapper {
   mapUsers(data: any): User[] {
     return Array.isArray(data)
-      ? data.map((userData: any) => this.map(userData))
+      ? data.map((item) => this.map(item)).filter((item) => item !== undefined)
       : [];
   }
 
-  map(userData: any): User {
+  map(data: any): User {
     return {
-      id: userData._id ?? userData,
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-      userName: userData.userName ?? '',
-      email: userData.email,
-      bio: userData.bio,
-      refreshToken: userData.refreshToken,
-      location: userData.location,
-      image: userData.image,
-      cover: userData.cover,
-      followers: this.mapFollowers(userData.followers),
-      following: this.mapFollowers(userData.following),
-      activities: this.mapActivities(userData.activities),
-      session: userData.session,
-      isVerified: userData.isVerified,
-      createdAt: userData.createdAt,
-      updatedAt: userData.updatedAt,
+      id: data.id ?? '',
+      firstName: data.firstName ?? '',
+      lastName: data.lastName ?? '',
+      userName: data.username ? data.username : '',
+      email: data.email ?? '',
+      bio: data.bio ?? '',
+      refreshToken: data.refreshToken,
+      location: data.location,
+      image: data.image,
+      cover: data.cover,
+      followers: data.followers ? this.mapFollowers(data.followers) : [],
+      following: data.following ? this.mapFollowers(data.following) : [],
+      activities: this.mapActivities(data.activities) ?? [],
+      session: data.session,
+      isVerified: data.isVerified,
+      createdAt: data.createdAt,
+      updatedAt: data.updatedAt,
     };
   }
 
   private mapFollowers(data: any): User[] {
-    return Array.isArray(data) ? data.map((user: any) => this.map(user)) : [];
+    return Array.isArray(data)
+      ? data.map((item) => this.map(item)).filter((item) => item !== undefined)
+      : [];
   }
 
   private mapActivities(activityData: any): Post[] {
     return Array.isArray(activityData)
-      ? activityData.map((activity: any) => {
-          return {
-            id: activity._id,
-            author: activity.user,
-            content: activity.text,
-            media: activity.media,
-            comments: activity.comments,
-            sharedPost: activity.sharedPost,
-            likes: this.mapLikes(activity.likes),
-          };
-        })
+      ? activityData.map((activity) => ({
+          id: activity.id ?? '',
+          author: activity.user ?? {},
+          content: activity.text ?? '',
+          media: activity.media ?? '',
+          comments: activity.comments ?? [],
+          sharedPost: activity.sharedPost ?? {},
+          likes: this.mapLikes(activity.likes) ?? [],
+        }))
       : [];
   }
 
   private mapLikes(likesData: any): User[] {
     return Array.isArray(likesData)
-      ? likesData.map((like: any) => {
-          return {
-            id: like._id,
-            firstName: like.firstName,
-            lastName: like.lastName,
-            email: like.email,
-          } as User;
-        })
+      ? likesData.map(
+          (like) =>
+            ({
+              id: like.id ?? '',
+              firstName: like.firstName ?? '',
+              lastName: like.lastName ?? '',
+              email: like.email ?? '',
+            } as User)
+        )
       : [];
   }
 }

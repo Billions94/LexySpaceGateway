@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Session } from '../../../dto';
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
-import { SessionRequestMapper } from '../mapper/session-request.mapper';
-import { SessionResponseMapper } from '../../..//session/response/session-response.mapper';
-import { api } from '../../..//api/api';
+import { SessionResponseMapper } from '../../response/session-response.mapper';
+import { api } from '../../../api/api';
 
 @Injectable()
 export class SessionGetRequestService extends AbstractRequestService {

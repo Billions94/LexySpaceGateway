@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { MapperUtil } from '../..//core/util';
+import { MapperUtil } from '../../core/util';
 import { UserResponseMapper } from '../../user/response/user-response.mapper';
 import { Post, User } from '../../dto';
 import { CommentResponseMapper } from '../../comment/response/comment-response-mapper';
@@ -14,14 +14,12 @@ export class PostResponseMapper {
   map(data: any): Post[] {
     const postData = MapperUtil.getData(data).posts;
 
-    return Array.isArray(postData)
-      ? postData.map((post) => this.mapPostData(post))
-      : [];
+    return Array.isArray(postData) ? postData.map(this.mapPostData) : [];
   }
 
   mapPostData(post: any): Post {
     return {
-      id: post._id,
+      id: post.id,
       content: post.text,
       media: post.media,
       sharedPost: post.sharedPost,

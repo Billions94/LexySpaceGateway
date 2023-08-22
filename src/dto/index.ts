@@ -84,6 +84,7 @@ export abstract class IQuery {
     users: User[];
     user: User;
     userById: User;
+    followersById?: Nullable<Nullable<User>[]>;
 }
 
 export class Comment {

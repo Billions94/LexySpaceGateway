@@ -31,6 +31,9 @@ import { ApolloServerPluginCacheControl } from 'apollo-server-core/dist/plugin/c
       subscriptions: {
         'subscriptions-transport-ws': true,
       },
+      persistedQueries: false,
+      playground: true,
+      introspection: process.env.NODE_ENV !== 'development',
     }),
     ApiModule,
     CoreModule,
