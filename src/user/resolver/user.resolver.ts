@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Args, Mutation, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { User, UserInput } from '../../dto';
 import { UserByIdRequestService } from '../request/service/user-by-id-request.service';
 import { UserDeleteRequestService } from '../request/service/user-delete.request.service';
@@ -7,16 +7,18 @@ import { UserGetRequestService } from '../request/service/user-get-request.servi
 import { UserUpdateRequestService } from '../request/service/user-update-request.service';
 import { UsersRequestService } from '../request/service/users-request.service';
 import { CacheControl } from 'nestjs-gql-cache-control';
+import { UserFollowersRequestService } from '../request/service/user-following-get-request.service';
 
 @Resolver(() => User)
 @Injectable()
 export class UserResolver {
   constructor(
-    private usersRequestService: UsersRequestService,
-    private userGetRequestService: UserGetRequestService,
-    private userByIdRequestService: UserByIdRequestService,
-    private userUpdateRequestService: UserUpdateRequestService,
-    private userDeleteRequestService: UserDeleteRequestService
+    private readonly usersRequestService: UsersRequestService,
+    private readonly userGetRequestService: UserGetRequestService,
+    private readonly userByIdRequestService: UserByIdRequestService,
+    private readonly userFollowersRequestService: UserFollowersRequestService,
+    private readonly userUpdateRequestService: UserUpdateRequestService,
+    private readonly userDeleteRequestService: UserDeleteRequestService
   ) {}
 
   @Query(() => [User])
@@ -34,6 +36,12 @@ export class UserResolver {
   @CacheControl({ inheritMaxAge: true })
   async userById(@Args('userId') userId: string): Promise<User> {
     return this.userByIdRequestService.execute(userId);
+  }
+
+  @Query(() => [User])
+  @CacheControl({ inheritMaxAge: true })
+  async followersById(@Args('userId') userId: string): Promise<User[]> {
+    return this.userFollowersRequestService.execute(userId);
   }
 
   @Mutation(() => User)

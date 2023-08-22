@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuthResponseMapper } from '../../../auth/response/auth-response.mapper';
+import { AuthResponseMapper } from '../../response/auth-response.mapper';
 import { SessionRequestMapper } from '../../../session/request/mapper/session-request.mapper';
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
 import { AuthResponse, SessionInput } from '../../../dto';
@@ -20,7 +20,6 @@ export class AuthLoginRequestService extends AbstractRequestService {
     );
 
     const requestBody = this.sessionRequestMapper.map(input);
-
     const response = await this.handlePostRequest(requestHandler, requestBody);
 
     return this.authResponseMapper.map(response);

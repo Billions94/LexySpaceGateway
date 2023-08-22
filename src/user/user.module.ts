@@ -9,6 +9,7 @@ import { UserUpdateRequestService } from './request/service/user-update-request.
 import { UsersRequestService } from './request/service/users-request.service';
 import { UserResolver } from './resolver/user.resolver';
 import { UserResponseMapper } from './response/user-response.mapper';
+import { UserFollowersRequestService } from './request/service/user-following-get-request.service';
 
 @Module({
   imports: [CoreModule, ApiModule],
@@ -23,6 +24,7 @@ import { UserResponseMapper } from './response/user-response.mapper';
     UsersRequestService,
     UserGetRequestService,
     UserByIdRequestService,
+    UserFollowersRequestService,
     UserUpdateRequestService,
     UserDeleteRequestService,
 

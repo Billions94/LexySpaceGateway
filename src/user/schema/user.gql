@@ -2,6 +2,7 @@ type Query {
   users: [User!]!
   user: User!
   userById(userId: String): User!
+  followersById(userId: String): [User]
 }
 
 type Mutation {

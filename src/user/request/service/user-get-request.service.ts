@@ -2,7 +2,7 @@ import { AbstractRequestService } from '../../../core/request/abstract-request.s
 import { api } from '../../../api/api';
 import { Injectable } from '@nestjs/common';
 import { User } from '../../../dto';
-import { UserResponseMapper } from '../../../user/response/user-response.mapper';
+import { UserResponseMapper } from '../../response/user-response.mapper';
 
 @Injectable()
 export class UserGetRequestService extends AbstractRequestService {

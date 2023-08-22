@@ -5,6 +5,7 @@ import { RequestInit, URLSearchParamsInit } from 'apollo-server-env';
 import { Body } from 'apollo-datasource-rest/dist/RESTDataSource';
 import { RestDatasourceInterface } from '../core/rest/rest-datasource.interface';
 import { RestCache } from '../core/rest/rest-cache';
+import process from 'process';
 
 /**
  * Decorator for apollo server RESTDataSource to make any implementing
@@ -22,7 +23,10 @@ export class ApiDatasourceDecorator
   ) {
     super();
     super.initialize({ context, cache });
-    this.baseURL = process.env.API_BASE_URL;
+    this.baseURL =
+      process.env.NODE_ENV === 'production'
+        ? process.env.API_BASE_URL
+        : process.env.API_LOCAL_HOST;
   }
 
   public get<TResult = any>(

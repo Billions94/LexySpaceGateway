@@ -1,22 +1,30 @@
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
 import { api } from '../../../api/api';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { User } from '../../../dto';
-import { UserResponseMapper } from '../../../user/response/user-response.mapper';
+import { UserResponseMapper } from '../../response/user-response.mapper';
 
 @Injectable()
-export class UserGetRequestService extends AbstractRequestService {
+export class UserFollowersRequestService extends AbstractRequestService {
   constructor(private userResponseMapper: UserResponseMapper) {
     super();
   }
 
-  async execute(): Promise<User> {
+  async execute(userId: string): Promise<User[]> {
     const requestHandler = this.requestHandlerFactory.createGetRequest(
-      api.handler.USER
+      api.handler.AUDIENCE
     );
 
-    const response = await this.handleGetRequest(requestHandler);
+    const parameterHandler = this.createParameterHandler();
+    parameterHandler.append('userId', userId);
 
-    return this.userResponseMapper.map(response);
+    const response = await this.handleGetRequest(
+      requestHandler,
+      parameterHandler
+    );
+
+    Logger.debug(response);
+
+    return this.userResponseMapper.mapUsers(response.followers);
   }
 }

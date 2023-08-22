@@ -20,7 +20,6 @@ export class AuthRegisterRequestService extends AbstractRequestService {
     );
 
     const requestBody = this.authRequestMapper.map(input);
-
     const response = await this.handlePostRequest(requestHandler, requestBody);
 
     return this.authResponseMapper.map(response);

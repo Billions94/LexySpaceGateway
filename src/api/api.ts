@@ -23,6 +23,7 @@ import { UsersRequestHandler } from './request/handlers/users-request.handler';
 import { UserByIdRequestHandler } from './request/handlers/user-by-id-request.handler';
 import { SessionGetRequestHandler } from './request/handlers/session-get-request.handler';
 import { SessionDeleteRequestHandler } from './request/handlers/session-delete-request.handler';
+import { UserGetAudienceRequestHandler } from './request/handlers/user-get-audience-request.handler';
 
 const requestHandler: { [key: string]: any } = {
   REGISTER: UserRegisterRequestHandler,
@@ -31,6 +32,7 @@ const requestHandler: { [key: string]: any } = {
   DELETE_SESSION: SessionDeleteRequestHandler,
   USER: UserGetRequestHandler,
   USER_BY_ID: UserByIdRequestHandler,
+  AUDIENCE: UserGetAudienceRequestHandler,
   USERS: UsersRequestHandler,
   UPDATE_USER: UserUpdateRequestHandler,
   DELETE_USER: UserDeleteRequestHandler,
