@@ -8,25 +8,27 @@ export class ReplyResponseMapper {
 
   map(data: any): Reply[] {
     return Array.isArray(data)
-      ? data.map((reply) => this.mapReplyData(reply))
+      ? data
+          .map((reply) => this.mapReply(reply))
+          .filter((reply) => reply !== undefined)
       : [];
   }
 
-  mapReplyData(replyData: any): Reply {
-    if (typeof replyData === 'string') {
+  mapReply(data: any): Reply {
+    if (typeof data === 'string') {
       return {
-        id: replyData,
+        id: data,
       } as Reply;
     }
 
     return {
-      id: replyData._id,
-      content: replyData.text,
-      media: replyData.media,
-      author: this.userResponseMapper.map(replyData.user),
-      commentId: replyData.commentId,
-      createdAt: replyData.createdAt,
-      updatedAt: replyData.updatedAt,
+      id: data.id,
+      content: data.content,
+      media: data.media,
+      author: this.userResponseMapper.map(data.user),
+      commentId: data.commentId,
+      createdAt: data.createdAt,
+      updatedAt: data.updatedAt,
     };
   }
 }

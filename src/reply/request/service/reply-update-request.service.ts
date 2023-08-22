@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ReplyResponseMapper } from '../../../reply/response/reply-response-mapper';
+import { ReplyResponseMapper } from '../../response/reply-response-mapper';
 import { api } from '../../../api/api';
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
 import { Reply, ReplyInput } from '../../../dto';
@@ -30,6 +30,6 @@ export class ReplyUpdateRequestService extends AbstractRequestService {
       parameterHandler
     );
 
-    return this.replyResponseMapper.mapReplyData(response);
+    return this.replyResponseMapper.mapReply(response);
   }
 }

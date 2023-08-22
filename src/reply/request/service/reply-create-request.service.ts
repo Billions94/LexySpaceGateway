@@ -3,7 +3,7 @@ import { api } from '../../../api/api';
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
 import { ReplyRequestMapper } from '../mapper/reply-request.mapper';
 import { Reply, ReplyInput } from '../../../dto';
-import { ReplyResponseMapper } from '../../../reply/response/reply-response-mapper';
+import { ReplyResponseMapper } from '../../response/reply-response-mapper';
 
 @Injectable()
 export class ReplyCreateRequestService extends AbstractRequestService {
@@ -30,6 +30,6 @@ export class ReplyCreateRequestService extends AbstractRequestService {
       parameterHandler
     );
 
-    return this.replyResponseMapper.mapReplyData(response);
+    return this.replyResponseMapper.mapReply(response);
   }
 }

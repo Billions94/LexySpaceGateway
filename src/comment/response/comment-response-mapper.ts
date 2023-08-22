@@ -13,15 +13,17 @@ export class CommentResponseMapper {
 
   map(data: any): Comment[] {
     if (Array.isArray(data)) {
-      return Array.isArray(data)
-        ? data.map((comment) => this.mapCommentData(comment))
-        : [];
+      return data
+        .map((comment) => this.mapCommentData(comment))
+        .filter((comment) => comment !== undefined);
     }
 
     const commentData = MapperUtil.getData(data).comments;
 
     return Array.isArray(commentData)
-      ? commentData.map((comment) => this.mapCommentData(comment))
+      ? commentData
+          .map((comment) => this.mapCommentData(comment))
+          .filter((comment) => comment !== undefined)
       : [];
   }
 

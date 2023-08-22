@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CacheControl } from 'nestjs-gql-cache-control';
 import { Reply, ReplyInput } from '../../dto';
-import { RepliessRequestService } from '../request/service/replies-request.service';
+import { RepliesRequestService } from '../request/service/replies-request.service';
 import { ReplyCreateRequestService } from '../request/service/reply-create-request.service';
 import { ReplyDeleteRequestService } from '../request/service/reply-delete-request.service';
 import { ReplyGetRequestService } from '../request/service/reply-get-request.service';
@@ -13,7 +13,7 @@ import { ReplyUpdateRequestService } from '../request/service/reply-update-reque
 export class ReplyResolver {
   constructor(
     private replyCreateRequestService: ReplyCreateRequestService,
-    private repliesRequestService: RepliessRequestService,
+    private repliesRequestService: RepliesRequestService,
     private replyGetRequestService: ReplyGetRequestService,
     private replyUpdateRequestService: ReplyUpdateRequestService,
     private replyDeleteRequestService: ReplyDeleteRequestService

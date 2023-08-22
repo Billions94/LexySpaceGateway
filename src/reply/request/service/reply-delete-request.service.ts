@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { api } from '../../../api/api';
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
-import { ReplyResponseMapper } from '../../../reply/response/reply-response-mapper';
 
 @Injectable()
 export class ReplyDeleteRequestService extends AbstractRequestService {

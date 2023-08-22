@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { api } from '../../../api/api';
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
 import { Reply } from '../../../dto';
-import { ReplyResponseMapper } from '../../../reply/response/reply-response-mapper';
+import { ReplyResponseMapper } from '../../response/reply-response-mapper';
 
 @Injectable()
-export class RepliessRequestService extends AbstractRequestService {
+export class RepliesRequestService extends AbstractRequestService {
   constructor(private replyResponseMapper: ReplyResponseMapper) {
     super();
   }

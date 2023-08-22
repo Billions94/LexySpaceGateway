@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { api } from '../../../api/api';
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
 import { Reply } from '../../../dto';
-import { ReplyResponseMapper } from '../../../reply/response/reply-response-mapper';
+import { ReplyResponseMapper } from '../../response/reply-response-mapper';
 
 @Injectable()
 export class ReplyGetRequestService extends AbstractRequestService {
@@ -23,6 +23,6 @@ export class ReplyGetRequestService extends AbstractRequestService {
       parameterHandler
     );
 
-    return this.replyResponseMapper.mapReplyData(response);
+    return this.replyResponseMapper.mapReply(response);
   }
 }
