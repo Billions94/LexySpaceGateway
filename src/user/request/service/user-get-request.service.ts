@@ -12,11 +12,10 @@ export class UserGetRequestService extends AbstractRequestService {
 
   async execute(): Promise<User> {
     const requestHandler = this.requestHandlerFactory.createGetRequest(
-      api.handler.USER
+      api.handler.CURRENT_USER
     );
 
     const response = await this.handleGetRequest(requestHandler);
-
     return this.userResponseMapper.map(response);
   }
 }

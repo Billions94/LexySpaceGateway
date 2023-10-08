@@ -1,12 +1,13 @@
 type Query {
   users: [User!]!
   user: User!
-  userById(userId: String): User!
+  userByUsername(username: String): User!
   followersById(userId: String): [User]
 }
 
 type Mutation {
-  updateUser(input: UserInput): User!
+  addCover(file: Upload!): User!
+  updateUser(input: UserInput, file: Upload): User!
   deleteUser(userId: String): Boolean!
 }
 

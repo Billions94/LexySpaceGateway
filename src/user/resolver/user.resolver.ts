@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { User, UserInput } from '../../dto';
-import { UserByIdRequestService } from '../request/service/user-by-id-request.service';
+import { UserByUsernameRequestService } from '../request/service/user-by-username-request.service';
 import { UserDeleteRequestService } from '../request/service/user-delete.request.service';
 import { UserGetRequestService } from '../request/service/user-get-request.service';
 import { UserUpdateRequestService } from '../request/service/user-update-request.service';
 import { UsersRequestService } from '../request/service/users-request.service';
 import { CacheControl } from 'nestjs-gql-cache-control';
 import { UserFollowersRequestService } from '../request/service/user-following-get-request.service';
+import { FileUpload, GraphQLUpload } from 'graphql-upload-ts';
+import { UserAddCoverRequestService } from '../request/service/user-add-cover-request.service';
 
 @Resolver(() => User)
 @Injectable()
@@ -15,7 +17,8 @@ export class UserResolver {
   constructor(
     private readonly usersRequestService: UsersRequestService,
     private readonly userGetRequestService: UserGetRequestService,
-    private readonly userByIdRequestService: UserByIdRequestService,
+    private readonly userByIdRequestService: UserByUsernameRequestService,
+    private readonly userAddCoverRequestService: UserAddCoverRequestService,
     private readonly userFollowersRequestService: UserFollowersRequestService,
     private readonly userUpdateRequestService: UserUpdateRequestService,
     private readonly userDeleteRequestService: UserDeleteRequestService
@@ -34,21 +37,31 @@ export class UserResolver {
 
   @Query(() => User)
   @CacheControl({ inheritMaxAge: true })
-  async userById(@Args('userId') userId: string): Promise<User> {
-    return this.userByIdRequestService.execute(userId);
+  async userByUsername(@Args('username') username: string): Promise<User> {
+    return this.userByIdRequestService.execute(username);
   }
 
   @Query(() => [User])
   @CacheControl({ inheritMaxAge: true })
-  async followersById(@Args('userId') userId: string): Promise<User[]> {
-    return this.userFollowersRequestService.execute(userId);
+  async followersById(@Args('username') username: string): Promise<User[]> {
+    return this.userFollowersRequestService.execute(username);
   }
 
   @Mutation(() => User)
-  async updateUser(@Args('input') input: UserInput): Promise<User> {
-    const user = await this.userGetRequestService.execute();
+  async addCover(
+    @Args({ name: 'file', type: () => GraphQLUpload })
+    file: FileUpload
+  ) {
+    return this.userAddCoverRequestService.execute(file);
+  }
 
-    return this.userUpdateRequestService.execute(user.id, input);
+  @Mutation(() => User)
+  async updateUser(
+    @Args('input') input: UserInput,
+    @Args({ name: 'file', type: () => GraphQLUpload })
+    file: FileUpload
+  ): Promise<User> {
+    return this.userUpdateRequestService.execute(input, file);
   }
 
   @Mutation(() => Boolean)

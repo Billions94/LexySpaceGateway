@@ -14,7 +14,11 @@ export class PostResponseMapper {
   map(data: any): Post[] {
     const postData = MapperUtil.getData(data).posts;
 
-    return Array.isArray(postData) ? postData.map(this.mapPostData) : [];
+    return Array.isArray(postData)
+      ? postData
+          .map((post) => this.mapPostData(post))
+          .filter((post) => post !== undefined)
+      : [];
   }
 
   mapPostData(post: any): Post {

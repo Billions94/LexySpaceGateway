@@ -10,13 +10,13 @@ export class UserFollowersRequestService extends AbstractRequestService {
     super();
   }
 
-  async execute(userId: string): Promise<User[]> {
+  async execute(username: string): Promise<User[]> {
     const requestHandler = this.requestHandlerFactory.createGetRequest(
       api.handler.AUDIENCE
     );
 
     const parameterHandler = this.createParameterHandler();
-    parameterHandler.append('userId', userId);
+    parameterHandler.append('username', username);
 
     const response = await this.handleGetRequest(
       requestHandler,

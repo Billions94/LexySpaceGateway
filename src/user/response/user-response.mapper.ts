@@ -10,6 +10,12 @@ export class UserResponseMapper {
   }
 
   map(data: any): User {
+    if (!data) {
+      return {
+        id: '',
+      } as any;
+    }
+
     return {
       id: data.id ?? '',
       firstName: data.firstName ?? '',

@@ -12,6 +12,7 @@ import { AuthModule } from './auth/auth.module';
 import { SessionModule } from './session/session.module';
 import responseCachePlugin from 'apollo-server-plugin-response-cache';
 import { ApolloServerPluginCacheControl } from 'apollo-server-core/dist/plugin/cacheControl';
+import { CloudinaryUploadModule } from './upload/cloudinaryUpload.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { ApolloServerPluginCacheControl } from 'apollo-server-core/dist/plugin/c
     ReplyModule,
     AuthModule,
     SessionModule,
+    CloudinaryUploadModule,
     // PubsubModule,
   ],
 })

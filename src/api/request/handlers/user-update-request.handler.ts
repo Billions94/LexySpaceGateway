@@ -6,7 +6,7 @@ export class UserUpdateRequestHandler
   extends AbstractRequestHandler
   implements PatchRequestHandlerInterface
 {
-  protected path = 'users/{userId}';
+  protected path = 'users/current-user';
 
   async patch(body: any, params?: URLSearchParams, init?: RequestInit) {
     init = this.forwardAuthHeader(init);
