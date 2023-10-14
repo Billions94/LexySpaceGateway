@@ -1,15 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { User, UserInput } from '../../dto';
+import { User, UserInput, UserResponse } from '../../dto';
 import { UserByUsernameRequestService } from '../request/service/user-by-username-request.service';
 import { UserDeleteRequestService } from '../request/service/user-delete.request.service';
 import { UserGetRequestService } from '../request/service/user-get-request.service';
 import { UserUpdateRequestService } from '../request/service/user-update-request.service';
 import { UsersRequestService } from '../request/service/users-request.service';
 import { CacheControl } from 'nestjs-gql-cache-control';
-import { UserFollowersRequestService } from '../request/service/user-following-get-request.service';
 import { FileUpload, GraphQLUpload } from 'graphql-upload-ts';
 import { UserAddCoverRequestService } from '../request/service/user-add-cover-request.service';
+import { UserGetFollowersRequestService } from '../request/service/user-get-followers-request.service';
+import { UserGetFollowingRequestService } from '../request/service/user-get-following-request.service';
+import { UserFollowRequestService } from '../request/service/user-follow-request.service';
 
 @Resolver(() => User)
 @Injectable()
@@ -19,7 +21,9 @@ export class UserResolver {
     private readonly userGetRequestService: UserGetRequestService,
     private readonly userByIdRequestService: UserByUsernameRequestService,
     private readonly userAddCoverRequestService: UserAddCoverRequestService,
-    private readonly userFollowersRequestService: UserFollowersRequestService,
+    private readonly userFollowRequestService: UserFollowRequestService,
+    private readonly userFollowersRequestService: UserGetFollowersRequestService,
+    private readonly userFollowingRequestService: UserGetFollowingRequestService,
     private readonly userUpdateRequestService: UserUpdateRequestService,
     private readonly userDeleteRequestService: UserDeleteRequestService
   ) {}
@@ -35,16 +39,24 @@ export class UserResolver {
     return this.userGetRequestService.execute();
   }
 
-  @Query(() => User)
+  @Query(() => Object)
   @CacheControl({ inheritMaxAge: true })
-  async userByUsername(@Args('username') username: string): Promise<User> {
+  async userByUsername(
+    @Args('username') username: string
+  ): Promise<UserResponse> {
     return this.userByIdRequestService.execute(username);
   }
 
   @Query(() => [User])
   @CacheControl({ inheritMaxAge: true })
-  async followersById(@Args('username') username: string): Promise<User[]> {
-    return this.userFollowersRequestService.execute(username);
+  async getFollowers(): Promise<User[]> {
+    return this.userFollowersRequestService.execute();
+  }
+
+  @Query(() => [User])
+  @CacheControl({ inheritMaxAge: true })
+  async getFollowing(): Promise<User[]> {
+    return this.userFollowingRequestService.execute();
   }
 
   @Mutation(() => User)
@@ -53,6 +65,11 @@ export class UserResolver {
     file: FileUpload
   ) {
     return this.userAddCoverRequestService.execute(file);
+  }
+
+  @Mutation(() => Boolean)
+  async followUser(@Args('username') username: string) {
+    return this.userFollowRequestService.execute(username);
   }
 
   @Mutation(() => User)

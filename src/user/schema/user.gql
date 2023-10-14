@@ -1,12 +1,34 @@
+union UserResponse = Success | Error
+
+type Success {
+  data: Data
+}
+
+type Data {
+  user: User!
+}
+
+type Error {
+  error: ErrorMessage!
+}
+
+type ErrorMessage {
+  message: String!
+}
+
+
+
 type Query {
   users: [User!]!
   user: User!
-  userByUsername(username: String): User!
-  followersById(userId: String): [User]
+  userByUsername(username: String): UserResponse!
+  getFollowers: [User]
+  getFollowing: [User]
 }
 
 type Mutation {
   addCover(file: Upload!): User!
+  followUser(username: String!): Boolean!
   updateUser(input: UserInput, file: Upload): User!
   deleteUser(userId: String): Boolean!
 }

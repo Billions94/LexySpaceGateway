@@ -23,7 +23,9 @@ import { UsersRequestHandler } from './request/handlers/users-request.handler';
 import { UserByUsernameRequestHandler } from './request/handlers/user-by-username-request.handler';
 import { SessionGetRequestHandler } from './request/handlers/session-get-request.handler';
 import { SessionDeleteRequestHandler } from './request/handlers/session-delete-request.handler';
-import { UserGetAudienceRequestHandler } from './request/handlers/user-get-audience-request.handler';
+import { UserGetFollowersRequestHandler } from './request/handlers/user-get-followers-request.handler';
+import { UserGetFollowingRequestHandler } from './request/handlers/user-get-following-request.handler';
+import { UserFollowRequestHandler } from './request/handlers/user-follow-request.handler';
 
 const requestHandler: { [key: string]: any } = {
   REGISTER: UserRegisterRequestHandler,
@@ -32,7 +34,9 @@ const requestHandler: { [key: string]: any } = {
   DELETE_SESSION: SessionDeleteRequestHandler,
   CURRENT_USER: UserGetRequestHandler,
   USER_BY_USERNAME: UserByUsernameRequestHandler,
-  AUDIENCE: UserGetAudienceRequestHandler,
+  FOLLOWERS: UserGetFollowersRequestHandler,
+  FOLLOWING: UserGetFollowingRequestHandler,
+  FOLLOW: UserFollowRequestHandler,
   USERS: UsersRequestHandler,
   UPDATE_USER: UserUpdateRequestHandler,
   DELETE_USER: UserDeleteRequestHandler,

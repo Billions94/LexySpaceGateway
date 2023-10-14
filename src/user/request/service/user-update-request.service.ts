@@ -22,10 +22,12 @@ export class UserUpdateRequestService extends AbstractRequestService {
     );
 
     const requestBody = this.userRequestMapper.map(input);
-    requestBody.image = (await this.uploadRequestService.execute(
-      files,
-      'image'
-    )) as string;
+    if (files) {
+      requestBody.image = (await this.uploadRequestService.execute(
+        files,
+        'image'
+      )) as string;
+    }
 
     const { user } = await this.handlePatchRequest(requestHandler, requestBody);
     return this.userResponseMapper.map(user);

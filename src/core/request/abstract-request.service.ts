@@ -152,11 +152,7 @@ export abstract class AbstractRequestService {
       return false;
     }
 
-    if (Array.isArray(jwt?.scopes) && jwt?.scopes.indexOf('customer') > -1) {
-      return true;
-    }
-
-    return false;
+    return Array.isArray(jwt?.scopes) && jwt?.scopes.indexOf('customer') > -1;
   }
 
   private parseJwt(token: string) {

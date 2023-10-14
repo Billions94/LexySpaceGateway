@@ -5,24 +5,17 @@ import { User } from '../../../dto';
 import { UserResponseMapper } from '../../response/user-response.mapper';
 
 @Injectable()
-export class UserFollowersRequestService extends AbstractRequestService {
+export class UserGetFollowersRequestService extends AbstractRequestService {
   constructor(private userResponseMapper: UserResponseMapper) {
     super();
   }
 
-  async execute(username: string): Promise<User[]> {
+  async execute(): Promise<User[]> {
     const requestHandler = this.requestHandlerFactory.createGetRequest(
-      api.handler.AUDIENCE
+      api.handler.FOLLOWERS
     );
 
-    const parameterHandler = this.createParameterHandler();
-    parameterHandler.append('username', username);
-
-    const response = await this.handleGetRequest(
-      requestHandler,
-      parameterHandler
-    );
-
-    return this.userResponseMapper.mapUsers(response.followers);
+    const response = await this.handleGetRequest(requestHandler);
+    return this.userResponseMapper.mapUsers(response);
   }
 }

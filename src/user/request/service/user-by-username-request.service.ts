@@ -1,7 +1,7 @@
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
 import { api } from '../../../api/api';
 import { Injectable } from '@nestjs/common';
-import { User } from '../../../dto';
+import { Error, Success, UserResponse } from '../../../dto';
 import { UserResponseMapper } from '../../response/user-response.mapper';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class UserByUsernameRequestService extends AbstractRequestService {
     super();
   }
 
-  async execute(username: string): Promise<User> {
+  async execute(username: string): Promise<UserResponse> {
     const requestHandler = this.requestHandlerFactory.createGetRequest(
       api.handler.USER_BY_USERNAME
     );
@@ -23,6 +23,18 @@ export class UserByUsernameRequestService extends AbstractRequestService {
       parameterHandler
     );
 
-    return this.userResponseMapper.map(response);
+    if (response === 'User not found!') {
+      return {
+        error: {
+          message: response,
+        },
+      } as Error;
+    }
+
+    return {
+      data: {
+        user: this.userResponseMapper.map(response),
+      },
+    } as Success;
   }
 }

@@ -2,12 +2,12 @@ import { ErrorMessage } from '../../core/error/error-message';
 import { ApolloError } from 'apollo-server-express';
 
 export class ErrorResponseHandler {
-  private readonly glueResponseError: ApolloError;
+  private readonly apiError: ApolloError;
 
   private errorMessages: ErrorMessage[] = [];
 
   constructor(error: ApolloError) {
-    this.glueResponseError = error;
+    this.apiError = error;
   }
 
   getErrorMessage(): string {
@@ -15,11 +15,8 @@ export class ErrorResponseHandler {
     let errorMessage = 'Unknown api error.';
 
     if (responseErrors.length > 0) {
-      // Set from error message array
+      // Set from an error message array
       errorMessage = responseErrors[0].message;
-    } else if (this.glueResponseError?.extensions?.response?.body) {
-      // set from body
-      errorMessage = this.glueResponseError?.extensions?.response?.body;
     }
 
     return errorMessage;
@@ -32,13 +29,10 @@ export class ErrorResponseHandler {
   }
 
   getErrors(): ErrorMessage[] {
-    let responseErrors = [];
+    let responseErrors: any[] = [];
 
-    if (this.glueResponseError.extensions?.response?.body?.errors) {
-      responseErrors =
-        this.glueResponseError.extensions?.response?.body?.errors;
-    } else if (this.glueResponseError.extensions?.errors) {
-      responseErrors = this.glueResponseError.extensions?.errors;
+    if (this.apiError) {
+      responseErrors = [this.apiError];
     }
 
     this.errorMessages = Array.isArray(responseErrors)

@@ -64,6 +64,7 @@ export abstract class IMutation {
     deleteSession?: Nullable<boolean>;
     uploadFile?: Nullable<boolean>;
     addCover: User;
+    followUser: boolean;
     updateUser: User;
     deleteUser: boolean;
 }
@@ -85,8 +86,9 @@ export abstract class IQuery {
     sessions?: Nullable<Session[]>;
     users: User[];
     user: User;
-    userByUsername: User;
-    followersById?: Nullable<Nullable<User>[]>;
+    userByUsername: UserResponse;
+    getFollowers?: Nullable<Nullable<User>[]>;
+    getFollowing?: Nullable<Nullable<User>[]>;
 }
 
 export class Comment {
@@ -142,6 +144,26 @@ export class File {
     url: string;
 }
 
+export class Success {
+    __typename?: 'Success';
+    data?: Nullable<Data>;
+}
+
+export class Data {
+    __typename?: 'Data';
+    user: User;
+}
+
+export class Error {
+    __typename?: 'Error';
+    error: ErrorMessage;
+}
+
+export class ErrorMessage {
+    __typename?: 'ErrorMessage';
+    message: string;
+}
+
 export class User {
     __typename?: 'User';
     id: string;
@@ -166,4 +188,5 @@ export class User {
 export type DateTime = any;
 export type DateRegister = any;
 export type Upload = any;
+export type UserResponse = Success | Error;
 type Nullable<T> = T | null;
