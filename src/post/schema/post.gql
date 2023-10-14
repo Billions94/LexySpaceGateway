@@ -19,7 +19,7 @@ type Post {
   content: String!
   media: String
   sharedPost: Post
-  author: User!
+  user: User!
   comments: [Comment]
   likes: [User]
   createdAt: Date

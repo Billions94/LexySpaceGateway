@@ -25,7 +25,7 @@ export class ReplyResponseMapper {
       id: data.id,
       content: data.content,
       media: data.media,
-      author: this.userResponseMapper.map(data.user),
+      user: this.userResponseMapper.map(data.user),
       commentId: data.commentId,
       createdAt: data.createdAt,
       updatedAt: data.updatedAt,

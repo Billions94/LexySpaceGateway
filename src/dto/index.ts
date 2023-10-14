@@ -96,7 +96,7 @@ export class Comment {
     id: string;
     content: string;
     media?: Nullable<string>;
-    author?: Nullable<User>;
+    user?: Nullable<User>;
     postId: string;
     replies?: Nullable<Nullable<Reply>[]>;
     createdAt?: Nullable<Date>;
@@ -114,7 +114,7 @@ export class Post {
     content: string;
     media?: Nullable<string>;
     sharedPost?: Nullable<Post>;
-    author: User;
+    user: User;
     comments?: Nullable<Nullable<Comment>[]>;
     likes?: Nullable<Nullable<User>[]>;
     createdAt?: Nullable<Date>;
@@ -126,7 +126,7 @@ export class Reply {
     id: string;
     content: string;
     media?: Nullable<string>;
-    author?: Nullable<User>;
+    user?: Nullable<User>;
     commentId: string;
     createdAt?: Nullable<Date>;
     updatedAt?: Nullable<Date>;

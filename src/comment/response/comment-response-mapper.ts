@@ -32,7 +32,7 @@ export class CommentResponseMapper {
       id: comment._id,
       content: comment.content,
       media: comment.media,
-      author: this.userResponseMapper.map(comment.user),
+      user: this.userResponseMapper.map(comment.user),
       replies: this.replyResponseMapper.map(comment.replies),
       postId: comment.postId,
       createdAt: comment.createdAt,

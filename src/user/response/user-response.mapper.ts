@@ -47,7 +47,7 @@ export class UserResponseMapper {
     return Array.isArray(activityData)
       ? activityData.map((activity) => ({
           id: activity.id ?? '',
-          author: activity.user ?? {},
+          user: activity.user ?? {},
           content: activity.text ?? '',
           media: activity.media ?? '',
           comments: activity.comments ?? [],

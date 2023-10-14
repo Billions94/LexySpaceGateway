@@ -13,7 +13,7 @@ type Reply {
   id: ID!
   content: String!
   media: String
-  author: User
+  user: User
   commentId: String!
   createdAt: Date
   updatedAt: Date

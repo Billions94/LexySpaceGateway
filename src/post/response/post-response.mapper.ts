@@ -27,7 +27,7 @@ export class PostResponseMapper {
       content: post.text,
       media: post.media,
       sharedPost: post.sharedPost,
-      author: this.userResponseMapper.map(post.user),
+      user: this.userResponseMapper.map(post.user),
       comments: this.commentResponseMapper.map(post.comments),
       likes: this.mapLikes(post.likes),
       createdAt: post.createdAt ?? new Date(),
