@@ -12,8 +12,6 @@ export class PostDeleteRequestService extends AbstractRequestService {
     const parameterHandler = this.createParameterHandler();
     parameterHandler.append('postId', postId);
 
-    await this.handleDeleteRequest(requestHandler, parameterHandler);
-
-    return true;
+    return await this.handleDeleteRequest(requestHandler, parameterHandler);
   }
 }

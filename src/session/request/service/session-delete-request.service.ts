@@ -13,10 +13,6 @@ export class SessionDeleteRequestService extends AbstractRequestService {
       requestHandler
     );
 
-    if (!accessToken && !refreshToken) {
-      return true;
-    }
-
-    return false;
+    return !accessToken && !refreshToken;
   }
 }

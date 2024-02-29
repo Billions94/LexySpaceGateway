@@ -29,7 +29,7 @@ export class CommentResponseMapper {
 
   mapCommentData(comment: any): Comment {
     return {
-      id: comment._id,
+      id: comment.id,
       content: comment.content,
       media: comment.media,
       user: this.userResponseMapper.map(comment.user),

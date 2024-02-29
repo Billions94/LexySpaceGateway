@@ -1,3 +1,4 @@
+
 type Query {
   posts: [Post!]!
   getPostById(postId: String): Post!
@@ -31,3 +32,4 @@ input PostInput {
   media: String
   sharedPost: String
 }
+

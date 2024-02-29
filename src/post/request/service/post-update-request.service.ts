@@ -30,6 +30,6 @@ export class PostUpdateRequestService extends AbstractRequestService {
       parameterHandler
     );
 
-    return this.postResponseMapper.mapPostData(response);
+    return this.postResponseMapper.mapPostData(response?.post);
   }
 }

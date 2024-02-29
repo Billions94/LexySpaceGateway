@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { api } from '../../../api/api';
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
-import { CommentResponseMapper } from '../../../comment/response/comment-response-mapper';
+import { CommentResponseMapper } from '../../response/comment-response-mapper';
 import { Comment } from '../../../dto';
 
 @Injectable()

@@ -1,5 +1,5 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
+import { Injectable } from '@nestjs/common';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Post, PostInput } from '../../dto';
 import { PostGetRequestService } from '../request/service/post-get-request.service';
 import { PostsRequestService } from '../request/service/posts-request.service';
@@ -7,8 +7,6 @@ import { PostUpdateRequestService } from '../request/service/post-update-request
 import { PostDeleteRequestService } from '../request/service/post-delete-request.service';
 import { PostCreateRequestService } from '../request/service/post-create-request.service';
 import { PostLikeRequestService } from '../request/service/post-like-request.service';
-import { PUB_SUB } from '../../pubsub/pubsub.module';
-import { RedisPubSub } from 'graphql-redis-subscriptions';
 import { CacheControl } from 'nestjs-gql-cache-control';
 
 enum SUBSCRIPTION_EVENTS {
