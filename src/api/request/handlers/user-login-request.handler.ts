@@ -6,7 +6,7 @@ export class UserLoginRequestHandler
   extends AbstractRequestHandler
   implements PostRequestHandlerInterface
 {
-  protected path = 'sessions/create';
+  protected path = 'sessions';
 
   async post(body: any, params?: URLSearchParams, init?: RequestInit) {
     return await this.executePostRequest(body, params, init);
