@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { FileUpload, GraphQLUpload } from 'graphql-upload-ts';
 import { CacheControl } from 'nestjs-gql-cache-control';
@@ -60,7 +60,6 @@ export class PostResolver {
     @Args({ name: 'file', type: () => GraphQLUpload })
     file: FileUpload
   ): Promise<PostResponse> {
-    Logger.debug(file);
     return this.postUpdateRequestService.execute(postId, input, file);
   }
 
