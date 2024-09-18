@@ -20,6 +20,28 @@ export class CommentInput {
     media?: Nullable<string>;
 }
 
+export class JoinPlanetInput {
+    members: string[];
+    planetId?: Nullable<string>;
+    accessCode?: Nullable<string>;
+}
+
+export class LeavePlanetInput {
+    members: string[];
+    planetId?: Nullable<string>;
+}
+
+export class PlanetInput {
+    name: string;
+    description: string;
+    accessCode?: Nullable<string>;
+    owner?: Nullable<string>;
+    members?: Nullable<Nullable<string>[]>;
+    posts?: Nullable<Nullable<string>[]>;
+    media?: Nullable<Nullable<string>[]>;
+    image?: Nullable<string>;
+}
+
 export class PostInput {
     content: string;
     media?: Nullable<string>;
@@ -54,8 +76,14 @@ export abstract class IMutation {
     addComment: Comment;
     updateComment: Comment;
     deleteComment: boolean;
-    addPost: Post;
-    updatePost: Post;
+    createPlanet: string;
+    joinPlanet: PlanetResponse;
+    leavePlanet: Planet;
+    updatePlanet: PlanetResponse;
+    uploadMedias: boolean;
+    deletePlanet: PlanetResponse;
+    addPost: PostResponse;
+    updatePost: PostResponse;
     addPostLike: boolean;
     deletePost: boolean;
     addReply: Reply;
@@ -79,8 +107,10 @@ export abstract class IQuery {
     __typename?: 'IQuery';
     comments: Comment[];
     getCommentById: Comment;
+    planets: Planet[];
+    planetById: Planet;
     posts: Post[];
-    getPostById: Post;
+    getPostById: PostResponse;
     replies: Reply[];
     getReplyById: Post;
     sessions?: Nullable<Session[]>;
@@ -103,9 +133,28 @@ export class Comment {
     updatedAt?: Nullable<Date>;
 }
 
+export class Planet {
+    __typename?: 'Planet';
+    id?: Nullable<string>;
+    name?: Nullable<string>;
+    description?: Nullable<string>;
+    owner?: Nullable<User>;
+    members?: Nullable<User[]>;
+    posts?: Nullable<Post[]>;
+    media?: Nullable<Nullable<string>[]>;
+    image?: Nullable<string>;
+}
+
 export abstract class ISubscription {
     __typename?: 'ISubscription';
     newPost?: Nullable<Post>;
+}
+
+export class PostResponse {
+    __typename?: 'PostResponse';
+    id?: Nullable<string>;
+    status?: Nullable<boolean>;
+    post?: Nullable<Post>;
 }
 
 export class Post {
@@ -151,7 +200,9 @@ export class Success {
 
 export class Data {
     __typename?: 'Data';
-    user: User;
+    user?: Nullable<User>;
+    planet?: Nullable<Planet>;
+    status?: Nullable<boolean>;
 }
 
 export class Error {
@@ -161,6 +212,7 @@ export class Error {
 
 export class ErrorMessage {
     __typename?: 'ErrorMessage';
+    status?: Nullable<boolean>;
     message: string;
 }
 
@@ -188,5 +240,6 @@ export class User {
 export type DateTime = any;
 export type DateRegister = any;
 export type Upload = any;
+export type PlanetResponse = Success | Error;
 export type UserResponse = Success | Error;
 type Nullable<T> = T | null;

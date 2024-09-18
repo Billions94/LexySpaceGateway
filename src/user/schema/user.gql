@@ -5,7 +5,9 @@ type Success {
 }
 
 type Data {
-  user: User!
+  user: User
+  planet: Planet
+  status: Boolean
 }
 
 type Error {
@@ -13,6 +15,7 @@ type Error {
 }
 
 type ErrorMessage {
+  status: Boolean
   message: String!
 }
 
@@ -61,4 +64,3 @@ input UserInput {
   image: String
   cover: String
 }
-

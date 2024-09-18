@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { MapperUtil } from '../../core/util';
-import { UserResponseMapper } from '../../user/response/user-response.mapper';
-import { Post, User } from '../../dto';
 import { CommentResponseMapper } from '../../comment/response/comment-response-mapper';
+import { MapperUtil } from '../../core/util';
+import { Post, PostResponse, User } from '../../dto';
+import { UserResponseMapper } from '../../user/response/user-response.mapper';
 
 @Injectable()
 export class PostResponseMapper {
@@ -16,14 +16,14 @@ export class PostResponseMapper {
 
     return Array.isArray(postData)
       ? postData
-          .map((post) => this.mapPostData(post))
+          .map((post) => this.mapPostData(post, 'array') as Post)
           .filter((post) => post !== undefined)
       : [];
   }
 
-  mapPostData(post: any): Post {
-    return {
-      id: post.id,
+  mapPostData(post: any, flag: 'array' | 'object'): PostResponse | Post {
+    const postResponse: Post = {
+      id: post.id || post._id,
       content: post.text,
       media: post.media,
       sharedPost: post.sharedPost,
@@ -32,6 +32,24 @@ export class PostResponseMapper {
       likes: this.mapLikes(post.likes),
       createdAt: post.createdAt ?? new Date(),
       updatedAt: post.updatedAt,
+    };
+
+    if (flag === 'array') return postResponse;
+    else if ('success' in post)
+      return {
+        status: post.success,
+        post: postResponse,
+      };
+    else
+      return {
+        post: postResponse,
+      };
+  }
+
+  mapNewPost(data: any): PostResponse {
+    return {
+      id: data.id,
+      status: data.success,
     };
   }
 

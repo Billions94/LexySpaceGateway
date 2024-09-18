@@ -1,0 +1,52 @@
+union PlanetResponse = Success | Error
+
+type Query {
+  planets: [Planet!]!
+  planetById(planetId: String): Planet!
+}
+
+type Mutation {
+  createPlanet(input: PlanetInput): String!
+  joinPlanet(input: JoinPlanetInput): PlanetResponse!
+  leavePlanet(input: LeavePlanetInput): Planet!
+  updatePlanet(
+    input: PlanetInput
+    planetId: String!
+    file: [Upload]
+  ): PlanetResponse!
+  uploadMedias(planetId: String!, file: [Upload]): Boolean!
+  deletePlanet(planetId: String): PlanetResponse!
+}
+
+input JoinPlanetInput {
+  members: [String!]!
+  planetId: String
+  accessCode: String
+}
+
+input LeavePlanetInput {
+  members: [String!]!
+  planetId: String
+}
+
+type Planet {
+  id: ID
+  name: String
+  description: String
+  owner: User
+  members: [User!]
+  posts: [Post!]
+  media: [String]
+  image: String
+}
+
+input PlanetInput {
+  name: String!
+  description: String!
+  accessCode: String
+  owner: String
+  members: [String]
+  posts: [String]
+  media: [String]
+  image: String
+}

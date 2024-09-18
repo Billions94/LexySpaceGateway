@@ -1,31 +1,39 @@
-import { PostGetRequestHandler } from './request/handlers/post-get-request.handler';
-import { UserLoginRequestHandler } from './request/handlers/user-login-request.handler';
-import { PostsRequestHandler } from './request/handlers/posts-request.handler';
-import { UserRegisterRequestHandler } from './request/handlers/user-register-request.handler';
-import { PostUpdateRequestHandler } from './request/handlers/post-update-request.handler';
-import { PostDeleteRequestHandler } from './request/handlers/post-delete-request.handler';
-import { UserGetRequestHandler } from './request/handlers/user-get-request.handler';
-import { UserUpdateRequestHandler } from './request/handlers/user-update-request.handler';
-import { UserDeleteRequestHandler } from './request/handlers/user-delete-request.handler';
-import { PostCreateRequestHandler } from './request/handlers/post-create-request.handler';
 import { CommentCreateRequestHandler } from './request/handlers/comment-create-request.handler';
-import { CommentsRequestHandler } from './request/handlers/comments-request.handler';
+import { CommentDeleteRequestHandler } from './request/handlers/comment-delete-request.handler';
 import { CommentGetRequestHandler } from './request/handlers/comment-get-request.handler';
 import { CommentUpdateRequestHandler } from './request/handlers/comment-update-request.handler';
-import { CommentDeleteRequestHandler } from './request/handlers/comment-delete-request.handler';
-import { ReplyCreateRequestHandler } from './request/handlers/reply-create-request.handler';
+import { CommentsRequestHandler } from './request/handlers/comments-request.handler';
+import { PlanetCreateRequestHandler } from './request/handlers/planet-create-request.handler';
+import { PlanetDeleteRequestHandler } from './request/handlers/planet-delete-request.handler';
+import { PlanetGetRequestHandler } from './request/handlers/planet-get-request.handler';
+import { PlanetJoinRequestHandler } from './request/handlers/planet-join-request.handler';
+import { PlanetLeaveRequestHandler } from './request/handlers/planet-leave-request.handler';
+import { PlanetUpdateRequestHandler } from './request/handlers/planet-update-request.handler';
+import { PlanetUploadMediaRequestHandler } from './request/handlers/planet-upload-media-request.handler';
+import { PlanetsRequestHandler } from './request/handlers/planets-request.handler';
+import { PostCreateRequestHandler } from './request/handlers/post-create-request.handler';
+import { PostDeleteRequestHandler } from './request/handlers/post-delete-request.handler';
+import { PostGetRequestHandler } from './request/handlers/post-get-request.handler';
+import { PostLikeRequestHandler } from './request/handlers/post-like-request.handler';
+import { PostUpdateRequestHandler } from './request/handlers/post-update-request.handler';
+import { PostsRequestHandler } from './request/handlers/posts-request.handler';
 import { RepliesRequestHandler } from './request/handlers/replies-request.handler';
+import { ReplyCreateRequestHandler } from './request/handlers/reply-create-request.handler';
+import { ReplyDeleteRequestHandler } from './request/handlers/reply-delete-request.handler';
 import { ReplyGetRequestHandler } from './request/handlers/reply-get-request.handler';
 import { ReplyUpdateRequestHandler } from './request/handlers/reply-update-request.handler';
-import { ReplyDeleteRequestHandler } from './request/handlers/reply-delete-request.handler';
-import { PostLikeRequestHandler } from './request/handlers/post-like-request.handler';
-import { UsersRequestHandler } from './request/handlers/users-request.handler';
-import { UserByUsernameRequestHandler } from './request/handlers/user-by-username-request.handler';
-import { SessionGetRequestHandler } from './request/handlers/session-get-request.handler';
 import { SessionDeleteRequestHandler } from './request/handlers/session-delete-request.handler';
+import { SessionGetRequestHandler } from './request/handlers/session-get-request.handler';
+import { UserByUsernameRequestHandler } from './request/handlers/user-by-username-request.handler';
+import { UserDeleteRequestHandler } from './request/handlers/user-delete-request.handler';
+import { UserFollowRequestHandler } from './request/handlers/user-follow-request.handler';
 import { UserGetFollowersRequestHandler } from './request/handlers/user-get-followers-request.handler';
 import { UserGetFollowingRequestHandler } from './request/handlers/user-get-following-request.handler';
-import { UserFollowRequestHandler } from './request/handlers/user-follow-request.handler';
+import { UserGetRequestHandler } from './request/handlers/user-get-request.handler';
+import { UserLoginRequestHandler } from './request/handlers/user-login-request.handler';
+import { UserRegisterRequestHandler } from './request/handlers/user-register-request.handler';
+import { UserUpdateRequestHandler } from './request/handlers/user-update-request.handler';
+import { UsersRequestHandler } from './request/handlers/users-request.handler';
 
 const requestHandler: { [key: string]: any } = {
   REGISTER: UserRegisterRequestHandler,
@@ -56,6 +64,14 @@ const requestHandler: { [key: string]: any } = {
   GET_REPLY: ReplyGetRequestHandler,
   UPDATE_REPLY: ReplyUpdateRequestHandler,
   DELETE_REPLY: ReplyDeleteRequestHandler,
+  CREATE_PLANET: PlanetCreateRequestHandler,
+  PLANETS: PlanetsRequestHandler,
+  GET_PLANET: PlanetGetRequestHandler,
+  JOIN_PLANET: PlanetJoinRequestHandler,
+  LEAVE_PLANET: PlanetLeaveRequestHandler,
+  UPDATE_PLANET: PlanetUpdateRequestHandler,
+  DELETE_PLANET: PlanetDeleteRequestHandler,
+  PLANETS_UPLOAD_MEDIAS: PlanetUploadMediaRequestHandler,
 };
 
 export const api: { [key: string]: any } = {

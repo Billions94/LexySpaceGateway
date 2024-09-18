@@ -1,11 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CONTEXT } from '@nestjs/graphql';
 import { RESTDataSource } from 'apollo-datasource-rest';
-import { RequestInit, URLSearchParamsInit } from 'apollo-server-env';
 import { Body } from 'apollo-datasource-rest/dist/RESTDataSource';
-import { RestDatasourceInterface } from '../core/rest/rest-datasource.interface';
-import { RestCache } from '../core/rest/rest-cache';
+import { RequestInit, URLSearchParamsInit } from 'apollo-server-env';
 import process from 'process';
+import { RestCache } from '../core/rest/rest-cache';
+import { RestDatasourceInterface } from '../core/rest/rest-datasource.interface';
 
 /**
  * Decorator for apollo server RESTDataSource to make any implementing

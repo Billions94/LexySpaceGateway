@@ -1,10 +1,10 @@
-import { AbstractRequestService } from '../../../core/request/abstract-request.service';
-import { api } from '../../../api/api';
 import { Injectable } from '@nestjs/common';
+import { api } from '../../../api/api';
+import { AbstractRequestService } from '../../../core/request/abstract-request.service';
 import { User, UserInput } from '../../../dto';
+import { CloudinaryUploadRequestService } from '../../../upload/request/cloudinary-upload-request.service';
 import { UserResponseMapper } from '../../response/user-response.mapper';
 import { UserRequestMapper } from '../mapper/user-request.mapper';
-import { CloudinaryUploadRequestService } from '../../../upload/request/cloudinary-upload-request.service';
 
 @Injectable()
 export class UserUpdateRequestService extends AbstractRequestService {
@@ -25,7 +25,7 @@ export class UserUpdateRequestService extends AbstractRequestService {
     if (files) {
       requestBody.image = (await this.uploadRequestService.execute(
         files,
-        'image'
+        'getUrl'
       )) as string;
     }
 

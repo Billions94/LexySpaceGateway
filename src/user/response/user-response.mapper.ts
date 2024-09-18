@@ -17,7 +17,7 @@ export class UserResponseMapper {
     }
 
     return {
-      id: data.id ?? '',
+      id: (data.id || data._id) ?? '',
       firstName: data.firstName ?? '',
       lastName: data.lastName ?? '',
       userName: data.userName ? data.userName : '',

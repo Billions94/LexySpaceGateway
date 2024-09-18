@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { api } from '../../../api/api';
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
 import { CloudinaryUploadRequestService } from '../../../upload/request/cloudinary-upload-request.service';
-import { api } from '../../../api/api';
 import { UserResponseMapper } from '../../response/user-response.mapper';
 
 @Injectable()
@@ -20,8 +20,8 @@ export class UserAddCoverRequestService extends AbstractRequestService {
     const reqBody = {
       cover: (await this.uploadRequestService.execute(
         files,
-        'image'
-      )) as string,
+        'getUrl'
+      )) as string[],
     };
 
     const { user } = await this.handlePatchRequest(requestHandler, reqBody);

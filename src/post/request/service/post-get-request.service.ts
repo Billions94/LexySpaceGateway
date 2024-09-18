@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { AbstractRequestService } from '../../../core/request/abstract-request.service';
-import { PostResponseMapper } from '../../response/post-response.mapper';
-import { Post } from '../../../dto';
 import { api } from '../../../api/api';
+import { AbstractRequestService } from '../../../core/request/abstract-request.service';
+import { PostResponse } from '../../../dto';
+import { PostResponseMapper } from '../../response/post-response.mapper';
 
 @Injectable()
 export class PostGetRequestService extends AbstractRequestService {
@@ -10,7 +10,7 @@ export class PostGetRequestService extends AbstractRequestService {
     super();
   }
 
-  async execute(postId: string): Promise<Post> {
+  async execute(postId: string): Promise<PostResponse> {
     const requestHandler = this.requestHandlerFactory.createGetRequest(
       api.handler.GET_POST
     );
@@ -23,6 +23,9 @@ export class PostGetRequestService extends AbstractRequestService {
       parameterHandler
     );
 
-    return this.postResponseMapper.mapPostData(response?.post);
+    return this.postResponseMapper.mapPostData(
+      response?.post,
+      'object'
+    ) as PostResponse;
   }
 }

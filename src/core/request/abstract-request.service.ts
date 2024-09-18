@@ -2,19 +2,19 @@ import { Inject } from '@nestjs/common';
 
 import { CONTEXT } from '@nestjs/graphql';
 import * as Sentry from '@sentry/node';
-import { RequestInit } from 'apollo-server-env';
-import { Transaction } from '@sentry/tracing';
-import '@sentry/tracing';
-import { UnprocessableEntityError } from '../error/unprocessable-entity.error';
-import { ParameterHandlerInterface } from '../rest/parameter-handler.interface';
-import { GetRequestHandlerInterface } from './get-request-handler.interface';
-import { PostRequestHandlerInterface } from './post-request-handler.interface';
-import { PatchRequestHandlerInterface } from './patch-request-handler.interface';
-import { DeleteRequestHandlerInterface } from './delete-request-handler.interface';
-import { ErrorResponseHandler } from '../../api/response/error-response.handler';
-import { RequestHandlerFactoryService } from '../../api/request/request-handler-factory.service';
-import { ParameterHandlerFactoryService } from '../rest/factory/parameter-handler-factory.service';
 import { Scope } from '@sentry/node';
+import '@sentry/tracing';
+import { Transaction } from '@sentry/tracing';
+import { RequestInit } from 'apollo-server-env';
+import { RequestHandlerFactoryService } from '../../api/request/request-handler-factory.service';
+import { ErrorResponseHandler } from '../../api/response/error-response.handler';
+import { UnprocessableEntityError } from '../error/unprocessable-entity.error';
+import { ParameterHandlerFactoryService } from '../rest/factory/parameter-handler-factory.service';
+import { ParameterHandlerInterface } from '../rest/parameter-handler.interface';
+import { DeleteRequestHandlerInterface } from './delete-request-handler.interface';
+import { GetRequestHandlerInterface } from './get-request-handler.interface';
+import { PatchRequestHandlerInterface } from './patch-request-handler.interface';
+import { PostRequestHandlerInterface } from './post-request-handler.interface';
 
 export abstract class AbstractRequestService {
   @Inject(RequestHandlerFactoryService)

@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { v2 as cloudinary } from 'cloudinary';
+import { ReadStream } from 'fs';
 import { FileUpload } from 'graphql-upload-ts';
 
 @Injectable()
@@ -16,35 +17,70 @@ export class CloudinaryUploadRequestService {
     this.cloudinary = cloudinary.uploader;
   }
 
-  async execute(files: any, field?: string): Promise<boolean | string> {
-    const base64String = await this.getFileAsBase64String(files[0].file);
+  async execute(
+    files: any,
+    field?: 'getUrl' | 'ignore'
+  ): Promise<boolean | string | string[]> {
+    const urls = Array.isArray(files)
+      ? await this.uploadMultiple(files)
+      : await this.uploadSingle(files[0]);
+
+    return field === 'getUrl' ? [urls as any] : urls ? true : false;
+  }
+
+  private async uploadSingle(file: FileUpload): Promise<string> {
+    return this.streamer(file.createReadStream(), file.mimetype, file.filename);
+  }
+
+  private async uploadMultiple(files: any[]): Promise<string[]> {
+    return await Promise.all(
+      files.map(
+        async (file: Promise<{ file: FileUpload }>): Promise<string> => {
+          const { mimetype, filename, createReadStream } = (await file)?.file;
+          return this.streamer(createReadStream(), mimetype, filename);
+        }
+      )
+    );
+  }
+
+  private async uploadFile(
+    base64String: string,
+    fileName: string
+  ): Promise<string> {
+    let url = '';
 
     try {
       const { secure_url } = await this.cloudinary.upload(base64String, {
         resource_type: 'auto',
         format: 'auto',
         upload_preset: 'lexyspace-uploads',
-        public_id: `${files[0].file.filename}`,
+        public_id: `${fileName}`,
       });
+      url = secure_url;
 
-      return field ? secure_url : true;
+      return url;
     } catch (error) {
       Logger.error(error);
-      return false;
     }
+
+    return url;
   }
 
-  private async getFileAsBase64String(file: FileUpload): Promise<string> {
+  private async streamer(
+    stream: ReadStream,
+    mimetype: string,
+    filename: string
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       const chunks: any[] = [];
 
-      file
-        .createReadStream()
+      stream
         .on('data', (chunk) => chunks.push(chunk))
         .on('end', () => {
           const binaryData = Buffer.concat(chunks).toString('base64');
-          const base64String = `data:${file.mimetype};base64,${binaryData}`;
-          resolve(base64String);
+          const base64String = `data:${mimetype};base64,${binaryData}`;
+
+          resolve(this.uploadFile(base64String, filename));
         })
         .on('error', (error) => reject(error));
     });

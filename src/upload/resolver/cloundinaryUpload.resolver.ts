@@ -15,6 +15,6 @@ export class CloudinaryUploadResolver {
     @Args({ name: 'file', type: () => GraphQLUpload })
     file: FileUpload
   ) {
-    return this.cloudinaryUploadRequestService.execute(file);
+    return this.cloudinaryUploadRequestService.execute(file, 'ignore');
   }
 }
