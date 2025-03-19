@@ -25,7 +25,7 @@ export class CloudinaryUploadRequestService {
       ? await this.uploadMultiple(files)
       : await this.uploadSingle(files[0]);
 
-    return field === 'getUrl' ? [urls as any] : urls ? true : false;
+    return field === 'getUrl' ? [urls as any] : !!urls;
   }
 
   private async uploadSingle(file: FileUpload): Promise<string> {

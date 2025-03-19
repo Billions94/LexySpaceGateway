@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { api } from '../../../api/api';
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
 import { LeavePlanetInput, Planet } from '../../../dto';
-import { PlanetResponseMapper } from '../../../planet/response/planet.response.mapper';
+import { PlanetResponseMapper } from '../../response/planet.response.mapper';
 
 @Injectable()
 export class LeavePlanetRequestService extends AbstractRequestService {
@@ -27,8 +27,6 @@ export class LeavePlanetRequestService extends AbstractRequestService {
       requestBody,
       parameterHandler
     );
-
-    console.log(response);
 
     return this.planetResponseMapper.mapItem(response);
   }

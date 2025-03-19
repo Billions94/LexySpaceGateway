@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { api } from '../../../api/api';
 import { AbstractRequestService } from '../../../core/request/abstract-request.service';
 import { JoinPlanetInput, PlanetResponse } from '../../../dto';
-import { PlanetResponseMapper } from '../../../planet/response/planet.response.mapper';
+import { PlanetResponseMapper } from '../../response/planet.response.mapper';
 
 @Injectable()
 export class JoinPlanetRequestService extends AbstractRequestService {
@@ -29,7 +29,7 @@ export class JoinPlanetRequestService extends AbstractRequestService {
     );
 
     const error = {
-      status: response.status ?? false,
+      status: response.status || false,
       message: response.errorMessage || response.message,
     };
 

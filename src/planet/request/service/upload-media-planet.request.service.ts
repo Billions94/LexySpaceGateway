@@ -17,9 +17,11 @@ export class UploadMediaPlanetRequestService extends AbstractRequestService {
     const parameterHandler = this.createParameterHandler();
     parameterHandler.append('planetId', planetId);
 
-    const requestBody: any = {};
+    const requestBody: { media?: string } = {};
     if (file)
-      requestBody.media = await this.uploadService.execute(file, 'getUrl');
+      requestBody.media = <string>(
+        await this.uploadService.execute(file, 'getUrl')
+      );
 
     return await this.handlePatchRequest(
       requestHandler,
